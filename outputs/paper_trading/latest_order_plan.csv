@@ -1,0 +1,22 @@
+﻿signal_date,ticker,name,regime,target_exposure,composite_score,target_weight,execution_price,current_quantity,target_quantity,side,order_quantity,order_type,dry_run,submission_result
+2026-06-30,047040,(주)대우건설,neutral,0.8,1.522786395286174,0.02666666666666667,16820.0,0,15,BUY,15,market,False,failed: KIS API error: 모의투자 장종료 입니다.
+2026-06-30,081660,(주)미스토홀딩스,neutral,0.8,1.3341522991861576,0.02666666666666667,46200.0,0,5,BUY,5,market,False,failed: KIS API error: 모의투자 장종료 입니다.
+2026-06-30,138930,(주)BNK금융지주,neutral,0.8,1.130160354621298,0.02666666666666667,18470.0,0,14,BUY,14,market,False,failed: KIS API error: 모의투자 장종료 입니다.
+2026-06-30,000990,(주)디비하이텍,neutral,0.8,1.0299583290562515,0.02666666666666667,111800.0,0,2,BUY,2,market,False,failed: KIS API error: 모의투자 장종료 입니다.
+2026-06-30,071050,한국투자금융지주(주),neutral,0.8,0.9470168182301396,0.02666666666666667,243500.0,0,1,BUY,1,market,False,failed: KIS API error: 모의투자 장종료 입니다.
+2026-06-30,175330,(주)JB금융지주,neutral,0.8,0.9265735542954472,0.02666666666666667,28000.0,0,9,BUY,9,market,False,failed: KIS API error: 모의투자 장종료 입니다.
+2026-06-30,000210,디엘(주),neutral,0.8,0.9182749519259238,0.02666666666666667,45250.0,0,5,BUY,5,market,False,failed: KIS API error: 모의투자 장종료 입니다.
+2026-06-30,139130,(주)아이엠금융지주,neutral,0.8,0.7172039635981104,0.02666666666666667,16810.0,0,15,BUY,15,market,False,failed: KIS API error: 모의투자 장종료 입니다.
+2026-06-30,096770,에스케이이노베이션(주),neutral,0.8,0.7088577101264408,0.02666666666666667,103800.0,0,2,BUY,2,market,False,failed: KIS API error: 모의투자 장종료 입니다.
+2026-06-30,161890,한국콜마(주),neutral,0.8,0.7016515421847419,0.02666666666666667,115100.0,0,2,BUY,2,market,False,failed: KIS API error: 모의투자 장종료 입니다.
+2026-06-30,000120,씨제이대한통운(주),neutral,0.8,0.6688380952092966,0.02666666666666667,76700.0,0,3,BUY,3,market,False,failed: KIS API error: 모의투자 장종료 입니다.
+2026-06-30,004000,롯데정밀화학(주),neutral,0.8,0.6311854163294958,0.02666666666666667,44850.0,0,5,BUY,5,market,False,failed: KIS API error: 모의투자 장종료 입니다.
+2026-06-30,066570,엘지전자(주),neutral,0.8,0.6279629739826348,0.02666666666666667,189100.0,0,1,BUY,1,market,False,failed: KIS API error: 모의투자 장종료 입니다.
+2026-06-30,073240,금호타이어(주),neutral,0.8,0.6023717353586746,0.02666666666666667,6330.0,0,42,BUY,42,market,False,failed: KIS API error: 모의투자 장종료 입니다.
+2026-06-30,259960,(주)크래프톤,neutral,0.8,0.5760616201967645,0.02666666666666667,236000.0,0,1,BUY,1,market,False,failed: KIS API error: 모의투자 장종료 입니다.
+2026-06-30,268280,미원스페셜티케미칼(주),neutral,0.8,0.5621291436518058,0.02666666666666667,107100.0,0,2,BUY,2,market,False,failed: KIS API error: 모의투자 장종료 입니다.
+2026-06-30,316140,(주)우리금융지주,neutral,0.8,0.5333699930226096,0.02666666666666667,31550.0,0,8,BUY,8,market,False,failed: KIS API error: 모의투자 장종료 입니다.
+2026-06-30,456040,오씨아이(주),neutral,0.8,0.527588512125999,0.02666666666666667,90200.0,0,2,BUY,2,market,False,failed: KIS API HTTP 500: 초당 거래건수를 초과하였습니다.
+2026-06-30,035250,(주)강원랜드,neutral,0.8,0.5124999230688012,0.02666666666666667,15080.0,0,17,BUY,17,market,False,failed: KIS API error: 모의투자 장종료 입니다.
+2026-06-30,028050,삼성이앤에이(주),neutral,0.8,0.5014324310253374,0.02666666666666667,47550.0,0,5,BUY,5,market,False,failed: KIS API error: 모의투자 장종료 입니다.
+2026-06-30,014820,동원시스템즈(주),neutral,0.8,0.4946435721777791,0.02666666666666667,19560.0,0,13,BUY,13,market,False,failed: KIS API error: 모의투자 장종료 입니다.

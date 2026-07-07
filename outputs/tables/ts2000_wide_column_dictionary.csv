@@ -1,0 +1,497 @@
+﻿source_column,canonical_name,position,statement_block,unit,include_in_standard_schema
+회사명,name,1,market_or_ratio,,True
+거래소코드,ticker,2,market_or_ratio,,True
+회계년도,fiscal_period,3,market_or_ratio,,True
+[A100000000][공통]자산(*)(IFRS)(천원),assets_krw_thousand,4,balance_sheet,thousand_krw,True
+[A600000000][공통]자본(*)(IFRS)(천원),equity_krw_thousand,5,balance_sheet,thousand_krw,True
+[A600010000][공통]* 수권주식수(IFRS)(주),,6,balance_sheet,shares,False
+[A600010100][공통]* 주당 액면가액(IFRS)(원),,7,balance_sheet,krw,False
+[A600010200][공통]* 발행한 주식총수(*)(IFRS)(주),shares_outstanding,8,balance_sheet,shares,True
+[A600010300][공통]   보통주(IFRS)(주),common_shares,9,balance_sheet,shares,True
+[A600010400][공통]   우선주(IFRS)(주),preferred_shares,10,balance_sheet,shares,True
+[A611000000][공통]   자본금(*)(IFRS)(천원),,11,balance_sheet,thousand_krw,False
+[A611010000][공통]      보통주자본금(IFRS)(천원),,12,balance_sheet,thousand_krw,False
+[A611010100][공통]      우선주자본금(IFRS)(천원),,13,balance_sheet,thousand_krw,False
+[A611050000][공통]   신종자본증권(IFRS)(천원),,14,balance_sheet,thousand_krw,False
+[A612000000][공통]   자본잉여금(*)(IFRS)(천원),,15,balance_sheet,thousand_krw,False
+[A612010000][공통]      주식발행초과금(IFRS)(천원),,16,balance_sheet,thousand_krw,False
+[A612010100][공통]      배당건설이자(IFRS)(천원),,17,balance_sheet,thousand_krw,False
+[A612010200][공통]      주식매입선택권(IFRS)(천원),,18,balance_sheet,thousand_krw,False
+[A612010300][공통]      감자차익(IFRS)(천원),,19,balance_sheet,thousand_krw,False
+[A612010400][공통]      보험차익(IFRS)(천원),,20,balance_sheet,thousand_krw,False
+[A612010500][공통]      합병차익(IFRS)(천원),,21,balance_sheet,thousand_krw,False
+[A612010600][공통]      자산수증이익(IFRS)(천원),,22,balance_sheet,thousand_krw,False
+[A612010700][공통]      채무면제이익(IFRS)(천원),,23,balance_sheet,thousand_krw,False
+[A612010800][공통]      자기주식처분이익(IFRS)(천원),,24,balance_sheet,thousand_krw,False
+[A612010900][공통]      전환권대가(IFRS)(천원),,25,balance_sheet,thousand_krw,False
+[A612011000][공통]      신주인수권대가(IFRS)(천원),,26,balance_sheet,thousand_krw,False
+[A612011100][공통]      교환권대가(IFRS)(천원),,27,balance_sheet,thousand_krw,False
+[A612011200][공통]      전환권재매입이익(IFRS)(천원),,28,balance_sheet,thousand_krw,False
+[A612011300][공통]      기타자본잉여금(IFRS)(천원),,29,balance_sheet,thousand_krw,False
+[A612011400][공통]      재평가적립금(2001년 이전)(IFRS)(천원),,30,balance_sheet,thousand_krw,False
+[A613000000][공통]   기타자본(*)(IFRS)(천원),,31,balance_sheet,thousand_krw,False
+[A613010000][공통]      자기주식(IFRS)(천원),,32,balance_sheet,thousand_krw,False
+[A613010100][공통]      자기주식처분손실(IFRS)(천원),,33,balance_sheet,thousand_krw,False
+[A613010200][공통]      주식할인발행차금(IFRS)(천원),,34,balance_sheet,thousand_krw,False
+[A613010300][공통]      주식매입선택권(IFRS)(천원),,35,balance_sheet,thousand_krw,False
+[A613010400][공통]      감자차손(IFRS)(천원),,36,balance_sheet,thousand_krw,False
+[A613010500][공통]      파생상품평가이익(IFRS)(천원),,37,balance_sheet,thousand_krw,False
+[A613010600][공통]      파생상품평가손실(IFRS)(천원),,38,balance_sheet,thousand_krw,False
+[A613010700][공통]      전환권재매입손실(IFRS)(천원),,39,balance_sheet,thousand_krw,False
+[A613010800][공통]      기타(IFRS)(천원),,40,balance_sheet,thousand_krw,False
+[A614000000][공통]   기타포괄손익누계액(*)(IFRS)(천원),,41,balance_sheet,thousand_krw,False
+[A614010000][공통]      금융자산평가손익(IFRS)(천원),,42,balance_sheet,thousand_krw,False
+[A614010010][공통]      기타포괄손익-공정가치측정 금융자산평가손익(IFRS)(천원),,43,balance_sheet,thousand_krw,False
+[A614010020][공통]      당기손익조정접근법 조정손익(IFRS)(천원),,44,balance_sheet,thousand_krw,False
+[A614010030][공통]      당기손익-공정가치측정 금융부채평가손익(IFRS)(천원),,45,balance_sheet,thousand_krw,False
+[A614010100][공통]      매도가능금융자산평가손익(IFRS)(천원),,46,balance_sheet,thousand_krw,False
+[A614010200][공통]      관계기업 등 기타포괄손익(IFRS)(천원),,47,balance_sheet,thousand_krw,False
+[A614010300][공통]      환산 관련 외환차이 적립금(환율변동차이)(IFRS)(천원),,48,balance_sheet,thousand_krw,False
+[A614010400][공통]      해외사업장순투자위험회피 적립금(IFRS)(천원),,49,balance_sheet,thousand_krw,False
+[A614010500][공통]      확정급여제도의 보험수리적 손익 적립금(IFRS)(천원),,50,balance_sheet,thousand_krw,False
+[A614010550][공통]      확정급여제도의 재측정요소(IFRS)(천원),,51,balance_sheet,thousand_krw,False
+[A614010600][공통]      현금흐름위험회피 적립금(IFRS)(천원),,52,balance_sheet,thousand_krw,False
+[A614010700][공통]      주식기준보상 적립금(IFRS)(천원),,53,balance_sheet,thousand_krw,False
+[A614010800][공통]      재평가잉여금(IFRS)(천원),,54,balance_sheet,thousand_krw,False
+[A614010900][공통]      기타(IFRS)(천원),,55,balance_sheet,thousand_krw,False
+[A615000000][공통]   이익잉여금(결손금)(*)(IFRS)(천원),,56,balance_sheet,thousand_krw,False
+[A615010000][공통]   * (지배)당기순손익(IFRS)(천원),,57,balance_sheet,thousand_krw,False
+[A615010100][공통]      이익준비금(IFRS)(천원),,58,balance_sheet,thousand_krw,False
+[A615010200][공통]      재무구조개선적립금(IFRS)(천원),,59,balance_sheet,thousand_krw,False
+[A615010300][공통]      기업합리화적립금(IFRS)(천원),,60,balance_sheet,thousand_krw,False
+[A615010500][공통]      기타법정적립금(IFRS)(천원),,61,balance_sheet,thousand_krw,False
+[A615010600][공통]      재평가손익(IFRS)(천원),,62,balance_sheet,thousand_krw,False
+[A615010650][공통]      보험수리적손익(IFRS)(천원),,63,balance_sheet,thousand_krw,False
+[A615011200][공통]      기타이익잉여금(IFRS)(천원),,64,balance_sheet,thousand_krw,False
+[A615011300][공통]      미처분이익잉여금(결손금)(IFRS)(천원),,65,balance_sheet,thousand_krw,False
+[A615011400][공통]      *전기이월미처분이익잉여금(결손금)(IFRS)(천원),,66,balance_sheet,thousand_krw,False
+[A800000000][공통]부채(*)(IFRS)(천원),liabilities_krw_thousand,67,balance_sheet,thousand_krw,True
+[B420000000][공통]* (정상)영업손익(보고서기재)(3개월)(IFRS)(천원),,68,income_statement,thousand_krw,False
+[B430000000][공통]* (정상)영업손익(계산수치)(3개월)(IFRS)(천원),,69,income_statement,thousand_krw,False
+[B450000000][공통]기타이익(*)(3개월)(IFRS)(천원),,70,income_statement,thousand_krw,False
+[B450014000][공통]   보험차익(3개월)(IFRS)(천원),,71,income_statement,thousand_krw,False
+[B450014300][공통]   퇴직연금운용이익(3개월)(IFRS)(천원),,72,income_statement,thousand_krw,False
+[B450014200][공통]   전기오류수정이익(3개월)(IFRS)(천원),,73,income_statement,thousand_krw,False
+[B450099000][공통]   기타(3개월)(IFRS)(천원),,74,income_statement,thousand_krw,False
+[B470000000][공통]기타손실(*)(3개월)(IFRS)(천원),,75,income_statement,thousand_krw,False
+[B470013800][공통]   법인세추납액(3개월)(IFRS)(천원),,76,income_statement,thousand_krw,False
+[B470014000][공통]   퇴직연금운용손실(3개월)(IFRS)(천원),,77,income_statement,thousand_krw,False
+[B470013900][공통]   전기오류수정손실(3개월)(IFRS)(천원),,78,income_statement,thousand_krw,False
+[B470099000][공통]   기타(3개월)(IFRS)(천원),,79,income_statement,thousand_krw,False
+[B700000000][공통]법인세비용차감전순이익(손실)(3개월)(IFRS)(천원),,80,income_statement,thousand_krw,False
+[B750000000][공통]법인세비용(3개월)(IFRS)(천원),,81,income_statement,thousand_krw,False
+[B800000000][공통]계속영업이익(손실)(3개월)(IFRS)(천원),,82,income_statement,thousand_krw,False
+[B820000000][공통]중단영업이익(손실)(3개월)(IFRS)(천원),,83,income_statement,thousand_krw,False
+[B820010000][공통]*중단영업손익 법인세효과(3개월)(IFRS)(천원),,84,income_statement,thousand_krw,False
+[B840000000][공통]당기순이익(손실)(3개월)(IFRS)(천원),,85,income_statement,thousand_krw,False
+[B860000000][공통]기타포괄손익(*)(3개월)(IFRS)(천원),,86,income_statement,thousand_krw,False
+[B860010000][공통]   금융자산평가손익(3개월)(IFRS)(천원),,87,income_statement,thousand_krw,False
+[B860010010][공통]   기타포괄손익-공정가치측정 금융자산평가손익(3개월)(IFRS)(천원),,88,income_statement,thousand_krw,False
+[B860010020][공통]   당기손익조정접근법 조정손익(3개월)(IFRS)(천원),,89,income_statement,thousand_krw,False
+[B860010030][공통]   당기손익-공정가치측정 금융부채평가손익(3개월)(IFRS)(천원),,90,income_statement,thousand_krw,False
+[B860010100][공통]   매도가능금융자산평가손익(3개월)(IFRS)(천원),,91,income_statement,thousand_krw,False
+[B860010200][공통]   관계기업 등 기타포괄손익(3개월)(IFRS)(천원),,92,income_statement,thousand_krw,False
+[B860010300][공통]   환산 관련 외환차이(환율변동차이)(3개월)(IFRS)(천원),,93,income_statement,thousand_krw,False
+[B860010400][공통]   해외사업장순투자위험회피(3개월)(IFRS)(천원),,94,income_statement,thousand_krw,False
+[B860010500][공통]   현금흐름위험회피 적립금(3개월)(IFRS)(천원),,95,income_statement,thousand_krw,False
+[B860010600][공통]   확정급여제도의 보험수리적손익(3개월)(IFRS)(천원),,96,income_statement,thousand_krw,False
+[B860010700][공통]   주식기준보상 적립금(3개월)(IFRS)(천원),,97,income_statement,thousand_krw,False
+[B860010800][공통]   재평가손익(3개월)(IFRS)(천원),,98,income_statement,thousand_krw,False
+[B860010900][공통]   기타(3개월)(IFRS)(천원),,99,income_statement,thousand_krw,False
+[B860011000][공통]   기타포괄손익관련 법인세(3개월)(IFRS)(천원),,100,income_statement,thousand_krw,False
+[B900000000][공통]총포괄손익(3개월)(IFRS)(천원),,101,income_statement,thousand_krw,False
+[B951010000][공통]*주당계속영업이익(3개월)(IFRS)(원),,102,income_statement,krw,False
+[B951020000][공통]*주당순손익(3개월)(IFRS)(원),,103,income_statement,krw,False
+[B953010000][공통]*희석주당계속영업이익(3개월)(IFRS)(원),,104,income_statement,krw,False
+[B953020000][공통]*희석주당순손익(3개월)(IFRS)(원),,105,income_statement,krw,False
+[B980010000][공통]* 성격별 비용계정(*)(3개월)(IFRS)(천원),,106,income_statement,thousand_krw,False
+[B980010100][공통]   제품과 재공품의 변동(3개월)(IFRS)(천원),,107,income_statement,thousand_krw,False
+[B980010200][공통]   기업이 수행한 용역으로서 자본화되어 있는 부분(3개월)(IFRS)(천원),,108,income_statement,thousand_krw,False
+[B980010300][공통]   원재료와 저장품(소모품)의 사용액(3개월)(IFRS)(천원),,109,income_statement,thousand_krw,False
+[B980010400][공통]   상품의 판매(3개월)(IFRS)(천원),,110,income_statement,thousand_krw,False
+[B980010500][공통]   기타원가(3개월)(IFRS)(천원),,111,income_statement,thousand_krw,False
+[B980010600][공통]   종업원 급여비용(3개월)(IFRS)(천원),,112,income_statement,thousand_krw,False
+[B980010700][공통]   감가상각비와 기타상각비 및 손상차손(3개월)(IFRS)(천원),,113,income_statement,thousand_krw,False
+[B980010710][공통]   세금과공과(3개월)(IFRS)(천원),,114,income_statement,thousand_krw,False
+[B980010720][공통]   대손상각비(3개월)(IFRS)(천원),,115,income_statement,thousand_krw,False
+[B980010800][공통]   물류비(운송보관)(3개월)(IFRS)(천원),,116,income_statement,thousand_krw,False
+[B980010900][공통]   광고 및 판매촉진비(3개월)(IFRS)(천원),,117,income_statement,thousand_krw,False
+[B980011000][공통]   임차료 및 리스료(3개월)(IFRS)(천원),,118,income_statement,thousand_krw,False
+[B980011100][공통]   경상연구개발비(3개월)(IFRS)(천원),,119,income_statement,thousand_krw,False
+[B980099000][공통]   기타비용(3개월)(IFRS)(천원),,120,income_statement,thousand_krw,False
+[B420000000][공통]* (정상)영업손익(보고서기재)(IFRS)(천원),,121,income_statement,thousand_krw,False
+[B430000000][공통]* (정상)영업손익(계산수치)(IFRS)(천원),operating_income_krw_thousand,122,income_statement,thousand_krw,True
+[B450000000][공통]기타이익(*)(IFRS)(천원),,123,income_statement,thousand_krw,False
+[B450014000][공통]   보험차익(IFRS)(천원),,124,income_statement,thousand_krw,False
+[B450014300][공통]   퇴직연금운용이익(IFRS)(천원),,125,income_statement,thousand_krw,False
+[B450014200][공통]   전기오류수정이익(IFRS)(천원),,126,income_statement,thousand_krw,False
+[B450099000][공통]   기타(IFRS)(천원),,127,income_statement,thousand_krw,False
+[B470000000][공통]기타손실(*)(IFRS)(천원),,128,income_statement,thousand_krw,False
+[B470013800][공통]   법인세추납액(IFRS)(천원),,129,income_statement,thousand_krw,False
+[B470014000][공통]   퇴직연금운용손실(IFRS)(천원),,130,income_statement,thousand_krw,False
+[B470013900][공통]   전기오류수정손실(IFRS)(천원),,131,income_statement,thousand_krw,False
+[B470099000][공통]   기타(IFRS)(천원),,132,income_statement,thousand_krw,False
+[B700000000][공통]법인세비용차감전순이익(손실)(IFRS)(천원),,133,income_statement,thousand_krw,False
+[B750000000][공통]법인세비용(IFRS)(천원),,134,income_statement,thousand_krw,False
+[B800000000][공통]계속영업이익(손실)(IFRS)(천원),,135,income_statement,thousand_krw,False
+[B820000000][공통]중단영업이익(손실)(IFRS)(천원),,136,income_statement,thousand_krw,False
+[B820010000][공통]*중단영업손익 법인세효과(IFRS)(천원),,137,income_statement,thousand_krw,False
+[B840000000][공통]당기순이익(손실)(IFRS)(천원),net_income_krw_thousand,138,income_statement,thousand_krw,True
+[B860000000][공통]기타포괄손익(*)(IFRS)(천원),,139,income_statement,thousand_krw,False
+[B860010000][공통]   금융자산평가손익(IFRS)(천원),,140,income_statement,thousand_krw,False
+[B860010010][공통]   기타포괄손익-공정가치측정 금융자산평가손익(IFRS)(천원),,141,income_statement,thousand_krw,False
+[B860010020][공통]   당기손익조정접근법 조정손익(IFRS)(천원),,142,income_statement,thousand_krw,False
+[B860010030][공통]   당기손익-공정가치측정 금융부채평가손익(IFRS)(천원),,143,income_statement,thousand_krw,False
+[B860010100][공통]   매도가능금융자산평가손익(IFRS)(천원),,144,income_statement,thousand_krw,False
+[B860010200][공통]   관계기업 등 기타포괄손익(IFRS)(천원),,145,income_statement,thousand_krw,False
+[B860010300][공통]   환산 관련 외환차이(환율변동차이)(IFRS)(천원),,146,income_statement,thousand_krw,False
+[B860010400][공통]   해외사업장순투자위험회피(IFRS)(천원),,147,income_statement,thousand_krw,False
+[B860010500][공통]   현금흐름위험회피 적립금(IFRS)(천원),,148,income_statement,thousand_krw,False
+[B860010600][공통]   확정급여제도의 보험수리적손익(IFRS)(천원),,149,income_statement,thousand_krw,False
+[B860010700][공통]   주식기준보상 적립금(IFRS)(천원),,150,income_statement,thousand_krw,False
+[B860010800][공통]   재평가손익(IFRS)(천원),,151,income_statement,thousand_krw,False
+[B860010900][공통]   기타(IFRS)(천원),,152,income_statement,thousand_krw,False
+[B860011000][공통]   기타포괄손익관련 법인세(IFRS)(천원),,153,income_statement,thousand_krw,False
+[B900000000][공통]총포괄손익(IFRS)(천원),,154,income_statement,thousand_krw,False
+[B951010000][공통]*주당계속영업이익(IFRS)(원),,155,income_statement,krw,False
+[B951020000][공통]*주당순손익(IFRS)(원),,156,income_statement,krw,False
+[B953010000][공통]*희석주당계속영업이익(IFRS)(원),,157,income_statement,krw,False
+[B953020000][공통]*희석주당순손익(IFRS)(원),,158,income_statement,krw,False
+[B980010000][공통]* 성격별 비용계정(*)(IFRS)(천원),,159,income_statement,thousand_krw,False
+[B980010100][공통]   제품과 재공품의 변동(IFRS)(천원),,160,income_statement,thousand_krw,False
+[B980010200][공통]   기업이 수행한 용역으로서 자본화되어 있는 부분(IFRS)(천원),,161,income_statement,thousand_krw,False
+[B980010300][공통]   원재료와 저장품(소모품)의 사용액(IFRS)(천원),,162,income_statement,thousand_krw,False
+[B980010400][공통]   상품의 판매(IFRS)(천원),,163,income_statement,thousand_krw,False
+[B980010500][공통]   기타원가(IFRS)(천원),,164,income_statement,thousand_krw,False
+[B980010600][공통]   종업원 급여비용(IFRS)(천원),,165,income_statement,thousand_krw,False
+[B980010700][공통]   감가상각비와 기타상각비 및 손상차손(IFRS)(천원),,166,income_statement,thousand_krw,False
+[B980010710][공통]   세금과공과(IFRS)(천원),,167,income_statement,thousand_krw,False
+[B980010720][공통]   대손상각비(IFRS)(천원),,168,income_statement,thousand_krw,False
+[B980010800][공통]   물류비(운송보관)(IFRS)(천원),,169,income_statement,thousand_krw,False
+[B980010900][공통]   광고 및 판매촉진비(IFRS)(천원),,170,income_statement,thousand_krw,False
+[B980011000][공통]   임차료 및 리스료(IFRS)(천원),,171,income_statement,thousand_krw,False
+[B980011100][공통]   경상연구개발비(IFRS)(천원),,172,income_statement,thousand_krw,False
+[B980099000][공통]   기타비용(IFRS)(천원),,173,income_statement,thousand_krw,False
+[C100000000][공통]기말자본금(*)(IFRS)(천원),,174,equity_statement,thousand_krw,False
+[C100010000][공통]   기초자본금(IFRS)(천원),,175,equity_statement,thousand_krw,False
+[C100010100][공통]   유상증자(감자)(IFRS)(천원),,176,equity_statement,thousand_krw,False
+[C100010200][공통]   무상증자(감자)(IFRS)(천원),,177,equity_statement,thousand_krw,False
+[C100010300][공통]   주식매수선택권(IFRS)(천원),,178,equity_statement,thousand_krw,False
+[C100010400][공통]   전환사채(IFRS)(천원),,179,equity_statement,thousand_krw,False
+[C100010500][공통]   신주인수권부사채(IFRS)(천원),,180,equity_statement,thousand_krw,False
+[C100010600][공통]   주식배당(IFRS)(천원),,181,equity_statement,thousand_krw,False
+[C100010700][공통]   합병분할(영업양수도 등)로 인한 변동(IFRS)(천원),,182,equity_statement,thousand_krw,False
+[C100010800][공통]   회계정책변경누적효과(IFRS)(천원),,183,equity_statement,thousand_krw,False
+[C100010900][공통]   오류수정 등(IFRS)(천원),,184,equity_statement,thousand_krw,False
+[C100012000][공통]   외화환산차이(IFRS)(천원),,185,equity_statement,thousand_krw,False
+[C100099000][공통]   기타(IFRS)(천원),,186,equity_statement,thousand_krw,False
+[C150000000][공통]기말신종자본증권(*)(IFRS)(천원),,187,equity_statement,thousand_krw,False
+[C150010000][공통]   기초신종자본증권(IFRS)(천원),,188,equity_statement,thousand_krw,False
+[C150010100][공통]   신종자본증권의 발행(IFRS)(천원),,189,equity_statement,thousand_krw,False
+[C150099000][공통]   기타(IFRS)(천원),,190,equity_statement,thousand_krw,False
+[C200000000][공통]기말자본잉여금(*)(IFRS)(천원),,191,equity_statement,thousand_krw,False
+[C200010000][공통]   기초자본잉여금(IFRS)(천원),,192,equity_statement,thousand_krw,False
+[C200010100][공통]   유상증자(감자)(IFRS)(천원),,193,equity_statement,thousand_krw,False
+[C200010200][공통]   무상증자(감자)(IFRS)(천원),,194,equity_statement,thousand_krw,False
+[C200010300][공통]   주식발행초과금(IFRS)(천원),,195,equity_statement,thousand_krw,False
+[C200010400][공통]   주식매수선택권(IFRS)(천원),,196,equity_statement,thousand_krw,False
+[C200010500][공통]   감자차손익(IFRS)(천원),,197,equity_statement,thousand_krw,False
+[C200010600][공통]   보험차익(IFRS)(천원),,198,equity_statement,thousand_krw,False
+[C200010700][공통]   자기주식처분손익(IFRS)(천원),,199,equity_statement,thousand_krw,False
+[C200010800][공통]   전환권대가(전환사채)(IFRS)(천원),,200,equity_statement,thousand_krw,False
+[C200010900][공통]   신주인수권대가(신주인수권부사채)(IFRS)(천원),,201,equity_statement,thousand_krw,False
+[C200011000][공통]   교환권대가(교환사채)(IFRS)(천원),,202,equity_statement,thousand_krw,False
+[C200011100][공통]   전환권재매입손익(IFRS)(천원),,203,equity_statement,thousand_krw,False
+[C200011200][공통]   결손금처리(IFRS)(천원),,204,equity_statement,thousand_krw,False
+[C200011300][공통]   지분법자본잉여금(IFRS)(천원),,205,equity_statement,thousand_krw,False
+[C200011400][공통]   합병분할(영업양수도 등)로 인한 변동(IFRS)(천원),,206,equity_statement,thousand_krw,False
+[C200011500][공통]   회계정책변경누적효과(IFRS)(천원),,207,equity_statement,thousand_krw,False
+[C200011600][공통]   오류수정 등(IFRS)(천원),,208,equity_statement,thousand_krw,False
+[C200011800][공통]   외화환산차이(IFRS)(천원),,209,equity_statement,thousand_krw,False
+[C200099000][공통]   기타(IFRS)(천원),,210,equity_statement,thousand_krw,False
+[C300000000][공통]기말기타자본(*)(IFRS)(천원),,211,equity_statement,thousand_krw,False
+[C300010000][공통]   기초기타자본(IFRS)(천원),,212,equity_statement,thousand_krw,False
+[C300010100][공통]   자기주식(IFRS)(천원),,213,equity_statement,thousand_krw,False
+[C300010200][공통]   자기주식처분손실(IFRS)(천원),,214,equity_statement,thousand_krw,False
+[C300010300][공통]   주식할인발행차금(IFRS)(천원),,215,equity_statement,thousand_krw,False
+[C300010400][공통]   주식매입선택권(IFRS)(천원),,216,equity_statement,thousand_krw,False
+[C300010500][공통]   파생상품평가이익(IFRS)(천원),,217,equity_statement,thousand_krw,False
+[C300010600][공통]   파생상품평가손실(IFRS)(천원),,218,equity_statement,thousand_krw,False
+[C300010700][공통]   출자전환채무(IFRS)(천원),,219,equity_statement,thousand_krw,False
+[C300010800][공통]   신주청약증거금(IFRS)(천원),,220,equity_statement,thousand_krw,False
+[C300010900][공통]   감자차손익(IFRS)(천원),,221,equity_statement,thousand_krw,False
+[C300011000][공통]   전환권재매입손익(IFRS)(천원),,222,equity_statement,thousand_krw,False
+[C300011100][공통]   지분법자본조정(IFRS)(천원),,223,equity_statement,thousand_krw,False
+[C300011200][공통]   합병분할(영업양수도 등)로 인한 변동(IFRS)(천원),,224,equity_statement,thousand_krw,False
+[C300011300][공통]   회계정책변경누적효과(IFRS)(천원),,225,equity_statement,thousand_krw,False
+[C300011400][공통]   오류수정 등(IFRS)(천원),,226,equity_statement,thousand_krw,False
+[C300011600][공통]   외화환산차이(IFRS)(천원),,227,equity_statement,thousand_krw,False
+[C300099000][공통]   기타(IFRS)(천원),,228,equity_statement,thousand_krw,False
+[C400000000][공통]기말기타포괄손익누계액(*)(IFRS)(천원),,229,equity_statement,thousand_krw,False
+[C400010000][공통]   기초기타포괄손익누계액(IFRS)(천원),,230,equity_statement,thousand_krw,False
+[C400010100][공통]   금융자산평가손익(IFRS)(천원),,231,equity_statement,thousand_krw,False
+[C400010110][공통]   기타포괄손익-공정가치측정 금융자산평가손익(IFRS)(천원),,232,equity_statement,thousand_krw,False
+[C400010120][공통]   당기손익조정접근법 조정손익(IFRS)(천원),,233,equity_statement,thousand_krw,False
+[C400010130][공통]   당기손익-공정가치측정 금융부채평가손익(IFRS)(천원),,234,equity_statement,thousand_krw,False
+[C400010200][공통]   매도가능금융자산 평가손익(IFRS)(천원),,235,equity_statement,thousand_krw,False
+[C400010300][공통]   관계기업 등 기타포괄손익(IFRS)(천원),,236,equity_statement,thousand_krw,False
+[C400010400][공통]   환산 관련 외환차이 적립금(환율변동차이)(IFRS)(천원),,237,equity_statement,thousand_krw,False
+[C400010500][공통]   해외사업장순투자위험회피 적립금(IFRS)(천원),,238,equity_statement,thousand_krw,False
+[C400010600][공통]   확정급여제도의 보험수리적 손익 적립금(IFRS)(천원),,239,equity_statement,thousand_krw,False
+[C400010650][공통]   확정급여제도의 재측정요소(IFRS)(천원),,240,equity_statement,thousand_krw,False
+[C400010700][공통]   현금흐름위험회피 적립금(IFRS)(천원),,241,equity_statement,thousand_krw,False
+[C400010800][공통]   주식기준보상 적립금(IFRS)(천원),,242,equity_statement,thousand_krw,False
+[C400010900][공통]   재평가잉여금(IFRS)(천원),,243,equity_statement,thousand_krw,False
+[C400011000][공통]   합병분할(영업양수도 등)로 인한 변동(IFRS)(천원),,244,equity_statement,thousand_krw,False
+[C400011100][공통]   회계정책변경누적효과(IFRS)(천원),,245,equity_statement,thousand_krw,False
+[C400011200][공통]   오류수정 등(IFRS)(천원),,246,equity_statement,thousand_krw,False
+[C400011400][공통]   외화환산차이(IFRS)(천원),,247,equity_statement,thousand_krw,False
+[C400099000][공통]   기타(IFRS)(천원),,248,equity_statement,thousand_krw,False
+[C500000000][공통]기말이익잉여금(결손금)(*)(IFRS)(천원),,249,equity_statement,thousand_krw,False
+[C500010000][공통]   처분후 이익잉여금(결손금)(*)(IFRS)(천원),,250,equity_statement,thousand_krw,False
+[C500010100][공통]      수정후 이익잉여금(결손금)(*)(IFRS)(천원),,251,equity_statement,thousand_krw,False
+[C500010200][공통]         기초이익잉여금(결손금)(IFRS)(천원),,252,equity_statement,thousand_krw,False
+[C500010300][공통]         회계정책변경누적효과(IFRS)(천원),,253,equity_statement,thousand_krw,False
+[C500010400][공통]         전기오류수정손익(IFRS)(천원),,254,equity_statement,thousand_krw,False
+[C500010500][공통]         기타(IFRS)(천원),,255,equity_statement,thousand_krw,False
+[C500010600][공통]      (연차배당)(IFRS)(천원),,256,equity_statement,thousand_krw,False
+[C500010650][공통]      (신종자본증권 분배금)(IFRS)(천원),,257,equity_statement,thousand_krw,False
+[C500010700][공통]      주식할인발행차금의 상각(IFRS)(천원),,258,equity_statement,thousand_krw,False
+[C500010800][공통]      자기주식처분손실의 상각(IFRS)(천원),,259,equity_statement,thousand_krw,False
+[C500010900][공통]      결손금처리(IFRS)(천원),,260,equity_statement,thousand_krw,False
+[C500011000][공통]      기타이익잉여금처분액(IFRS)(천원),,261,equity_statement,thousand_krw,False
+[C500011100][공통]   (중간배당)(IFRS)(천원),,262,equity_statement,thousand_krw,False
+[C500011150][공통]   확정급여제도의 재측정요소(IFRS)(천원),,263,equity_statement,thousand_krw,False
+[C500011200][공통]   기타포괄손익(IFRS)(천원),,264,equity_statement,thousand_krw,False
+[C500011300][공통]   당기순이익(총포괄손익)(IFRS)(천원),,265,equity_statement,thousand_krw,False
+[C500011350][공통]   보험수리적손익(IFRS)(천원),,266,equity_statement,thousand_krw,False
+[C500011400][공통]   재평가손익(IFRS)(천원),,267,equity_statement,thousand_krw,False
+[C500011500][공통]   지분법이익잉여금(IFRS)(천원),,268,equity_statement,thousand_krw,False
+[C500011600][공통]   합병분할(영업양수도 등)로 인한 변동(IFRS)(천원),,269,equity_statement,thousand_krw,False
+[C500011800][공통]   외화환산차이(IFRS)(천원),,270,equity_statement,thousand_krw,False
+[C500099000][공통]   기타(IFRS)(천원),,271,equity_statement,thousand_krw,False
+[C700000000][공통]합계(IFRS)(천원),,272,equity_statement,thousand_krw,False
+[D100000000][공통]영업활동으로 인한 현금흐름(간접법)(*)(IFRS)(천원),operating_cash_flow_krw_thousand,273,cash_flow_statement,thousand_krw,True
+[D100010000][공통]   *(직접법)총현금유입(*)(IFRS)(천원),,274,cash_flow_statement,thousand_krw,False
+[D100010100][공통]      재화의 판매와 용역제공에 따른 현금유입(IFRS)(천원),,275,cash_flow_statement,thousand_krw,False
+"[D100010300][공통]      수입보험료, 보험금, 연금 및 기타 급부금관련 현금유입(IFRS)(천원)",,276,cash_flow_statement,thousand_krw,False
+[D100010400][공통]      이자수취액(IFRS)(천원),,277,cash_flow_statement,thousand_krw,False
+[D100010500][공통]      배당금수취액(IFRS)(천원),,278,cash_flow_statement,thousand_krw,False
+[D100010600][공통]      법인세환급(IFRS)(천원),,279,cash_flow_statement,thousand_krw,False
+[D100011300][공통]      기타현금유입액(IFRS)(천원),,280,cash_flow_statement,thousand_krw,False
+[D100020000][공통]   *(직접법)총현금유출(*)(IFRS)(천원),,281,cash_flow_statement,thousand_krw,False
+[D100020200][공통]      종업원과 관련하여 직·간접으로 발생하는 현금유출(IFRS)(천원),,282,cash_flow_statement,thousand_krw,False
+"[D100020300][공통]      수입보험료, 보험금, 연금 및 기타 급부금관련 현금유출(IFRS)(천원)",,283,cash_flow_statement,thousand_krw,False
+[D100020400][공통]      이자비용유출액(IFRS)(천원),,284,cash_flow_statement,thousand_krw,False
+[D100020500][공통]      배당금지급액(IFRS)(천원),,285,cash_flow_statement,thousand_krw,False
+[D100020600][공통]      법인세납부(IFRS)(천원),,286,cash_flow_statement,thousand_krw,False
+[D100020700][공통]      단기매매목적으로 보유하는 계약에서 발생하는 현금유출(IFRS)(천원),,287,cash_flow_statement,thousand_krw,False
+[D100021400][공통]      기타현금유출액(IFRS)(천원),,288,cash_flow_statement,thousand_krw,False
+[D101000000][공통]   당기순손익(IFRS)(천원),,289,cash_flow_statement,thousand_krw,False
+[D101400000][공통]   법인세비용차감전순손익(IFRS)(천원),,290,cash_flow_statement,thousand_krw,False
+[D102000000][공통]   현금 유출이 없는 비용 등 가산(*)(IFRS)(천원),,291,cash_flow_statement,thousand_krw,False
+[D102018800][공통]      전기오류수정손익(IFRS)(천원),,292,cash_flow_statement,thousand_krw,False
+[D102018900][공통]      비지배주주지분순손익(IFRS)(천원),,293,cash_flow_statement,thousand_krw,False
+[D102019000][공통]      보험수리적손실(IFRS)(천원),,294,cash_flow_statement,thousand_krw,False
+[D102099000][공통]      기타(IFRS)(천원),,295,cash_flow_statement,thousand_krw,False
+[D106000000][공통]   (현금 유입이 없는 수익 등 차감)(*)(IFRS)(천원),,296,cash_flow_statement,thousand_krw,False
+[D106018100][공통]      전기오류수정손익(IFRS)(천원),,297,cash_flow_statement,thousand_krw,False
+[D106018200][공통]      비지배주주지분순손익(IFRS)(천원),,298,cash_flow_statement,thousand_krw,False
+[D106018300][공통]      보험수리적이익(IFRS)(천원),,299,cash_flow_statement,thousand_krw,False
+[D106099000][공통]      기타(IFRS)(천원),,300,cash_flow_statement,thousand_krw,False
+[D108000000][공통]   영업활동으로 인한 자산부채 변동(운전자본 변동)(*)(IFRS)(천원),,301,cash_flow_statement,thousand_krw,False
+[D108010000][공통]      자산의 감소(증가)(*)(IFRS)(천원),,302,cash_flow_statement,thousand_krw,False
+[D108040000][공통]      부채의 증가(감소)(*)(IFRS)(천원),,303,cash_flow_statement,thousand_krw,False
+[D108080000][공통]      정부보조금 등의 변동(IFRS)(천원),,304,cash_flow_statement,thousand_krw,False
+[D108099000][공통]      기타 운전자본의 변동(IFRS)(천원),,305,cash_flow_statement,thousand_krw,False
+[D109010000][공통]   *영업에서 창출된 현금흐름(IFRS)(천원),,306,cash_flow_statement,thousand_krw,False
+[D109010100][공통]   이자수입(IFRS)(천원),,307,cash_flow_statement,thousand_krw,False
+[D109010200][공통]   이자지급(-)(IFRS)(천원),,308,cash_flow_statement,thousand_krw,False
+[D109010300][공통]   배당금수입(IFRS)(천원),,309,cash_flow_statement,thousand_krw,False
+[D109010400][공통]   배당금지급(-)(IFRS)(천원),,310,cash_flow_statement,thousand_krw,False
+[D109010500][공통]   법인세환입(IFRS)(천원),,311,cash_flow_statement,thousand_krw,False
+[D109010600][공통]   법인세납부(-)(IFRS)(천원),,312,cash_flow_statement,thousand_krw,False
+[D109010700][공통]   중단영업관련 현금흐름(IFRS)(천원),,313,cash_flow_statement,thousand_krw,False
+[D200000000][공통]투자활동으로 인한 현금흐름(*)(IFRS)(천원),,314,cash_flow_statement,thousand_krw,False
+[D201000000][공통]   투자활동으로 인한 현금유입액(*)(IFRS)(천원),,315,cash_flow_statement,thousand_krw,False
+[D201017400][공통]      정부보조금 등의 변동(IFRS)(천원),,316,cash_flow_statement,thousand_krw,False
+[D201017500][공통]      종속기업 및 기타사업의 지배력 관련한 현금흐름(IFRS)(천원),,317,cash_flow_statement,thousand_krw,False
+[D201017600][공통]      합병분할(양수도등)으로 인한 현금유입액(IFRS)(천원),,318,cash_flow_statement,thousand_krw,False
+[D201099000][공통]      기타투자활동으로 인한 현금유입액(IFRS)(천원),,319,cash_flow_statement,thousand_krw,False
+[D206000000][공통]   (투자활동으로 인한 현금유출액)(*)(IFRS)(천원),,320,cash_flow_statement,thousand_krw,False
+[D206017400][공통]      정부보조금 등의 변동(IFRS)(천원),,321,cash_flow_statement,thousand_krw,False
+[D206017500][공통]      종속기업 및 기타사업의 지배력 관련한 현금흐름(IFRS)(천원),,322,cash_flow_statement,thousand_krw,False
+[D206017600][공통]      합병분할(양수도등)으로 인한 현금유출액(IFRS)(천원),,323,cash_flow_statement,thousand_krw,False
+[D206099000][공통]      기타투자활동으로 인한 현금유출액(IFRS)(천원),,324,cash_flow_statement,thousand_krw,False
+[D209010100][공통]   이자수입(IFRS)(천원),,325,cash_flow_statement,thousand_krw,False
+[D209010200][공통]   이자지급(-)(IFRS)(천원),,326,cash_flow_statement,thousand_krw,False
+[D209010300][공통]   배당금수입(IFRS)(천원),,327,cash_flow_statement,thousand_krw,False
+[D209010400][공통]   배당금지급(-)(IFRS)(천원),,328,cash_flow_statement,thousand_krw,False
+[D209010500][공통]   법인세환입(IFRS)(천원),,329,cash_flow_statement,thousand_krw,False
+[D209010600][공통]   법인세납부(-)(IFRS)(천원),,330,cash_flow_statement,thousand_krw,False
+[D209010700][공통]   중단영업관련 현금흐름(IFRS)(천원),,331,cash_flow_statement,thousand_krw,False
+[D300000000][공통]재무활동으로 인한 현금흐름(*)(IFRS)(천원),,332,cash_flow_statement,thousand_krw,False
+[D301000000][공통]   재무활동으로 인한 현금유입액(*)(IFRS)(천원),,333,cash_flow_statement,thousand_krw,False
+[D301013700][공통]      기타부채의 증가(IFRS)(천원),,334,cash_flow_statement,thousand_krw,False
+[D301013900][공통]      유상증자(IFRS)(천원),,335,cash_flow_statement,thousand_krw,False
+[D301014000][공통]      자본금의 증가(IFRS)(천원),,336,cash_flow_statement,thousand_krw,False
+[D301014200][공통]      자본잉여금의 증가(IFRS)(천원),,337,cash_flow_statement,thousand_krw,False
+[D301014300][공통]      종속회사의 증자 등(IFRS)(천원),,338,cash_flow_statement,thousand_krw,False
+[D301014400][공통]      이익잉여금의 증가(IFRS)(천원),,339,cash_flow_statement,thousand_krw,False
+[D301014500][공통]      자기주식의 처분(IFRS)(천원),,340,cash_flow_statement,thousand_krw,False
+[D301014600][공통]      주식매입선택권의 행사(IFRS)(천원),,341,cash_flow_statement,thousand_krw,False
+[D301014700][공통]      연결자본거래로인한현금유입액(IFRS)(천원),,342,cash_flow_statement,thousand_krw,False
+[D301014800][공통]      종속기업 소유지분 변동에 따른 현금흐름(IFRS)(천원),,343,cash_flow_statement,thousand_krw,False
+[D301014900][공통]      비지배주주지분의 증가(IFRS)(천원),,344,cash_flow_statement,thousand_krw,False
+[D301015000][공통]      정부보조금 등의 변동(IFRS)(천원),,345,cash_flow_statement,thousand_krw,False
+[D301015100][공통]      환율변동으로인한 차이조정(IFRS)(천원),,346,cash_flow_statement,thousand_krw,False
+[D301015200][공통]      합병분할(양수도등)으로 인한 현금유입액(IFRS)(천원),,347,cash_flow_statement,thousand_krw,False
+[D301099000][공통]      기타재무활동으로 인한 현금유입액(IFRS)(천원),,348,cash_flow_statement,thousand_krw,False
+[D306000000][공통]   (재무활동으로 인한 현금유출액)(*)(IFRS)(천원),,349,cash_flow_statement,thousand_krw,False
+[D306013900][공통]      유상감자(IFRS)(천원),,350,cash_flow_statement,thousand_krw,False
+[D306014000][공통]      자본금의 감소(IFRS)(천원),,351,cash_flow_statement,thousand_krw,False
+[D306014200][공통]      자본잉여금의 감소(IFRS)(천원),,352,cash_flow_statement,thousand_krw,False
+[D306014300][공통]      종속회사의 감자 등(IFRS)(천원),,353,cash_flow_statement,thousand_krw,False
+[D306014400][공통]      이익잉여금의 감소(IFRS)(천원),,354,cash_flow_statement,thousand_krw,False
+[D306014500][공통]      자기주식의 취득(IFRS)(천원),,355,cash_flow_statement,thousand_krw,False
+[D306014600][공통]      연결자본거래로인한현금유출액(IFRS)(천원),,356,cash_flow_statement,thousand_krw,False
+[D306014700][공통]      종속기업 소유지분 변동에 따른 현금흐름(IFRS)(천원),,357,cash_flow_statement,thousand_krw,False
+[D306014800][공통]      비지배주주지분의 감소(IFRS)(천원),,358,cash_flow_statement,thousand_krw,False
+[D306014900][공통]      정부보조금 등의 변동(IFRS)(천원),,359,cash_flow_statement,thousand_krw,False
+[D306015000][공통]      환율변동으로인한 차이조정(IFRS)(천원),,360,cash_flow_statement,thousand_krw,False
+[D306015100][공통]      합병분할(양수도등)으로 인한 현금유출액(IFRS)(천원),,361,cash_flow_statement,thousand_krw,False
+[D306099000][공통]      기타재무활동으로 인한 현금유출액(IFRS)(천원),,362,cash_flow_statement,thousand_krw,False
+[D309010100][공통]   이자수입(IFRS)(천원),,363,cash_flow_statement,thousand_krw,False
+[D309010200][공통]   이자지급(-)(IFRS)(천원),,364,cash_flow_statement,thousand_krw,False
+[D309010300][공통]   배당금수입(IFRS)(천원),,365,cash_flow_statement,thousand_krw,False
+[D309010400][공통]   배당금지급(-)(IFRS)(천원),,366,cash_flow_statement,thousand_krw,False
+[D309010500][공통]   법인세환입(IFRS)(천원),,367,cash_flow_statement,thousand_krw,False
+[D309010600][공통]   법인세납부(-)(IFRS)(천원),,368,cash_flow_statement,thousand_krw,False
+[D309010700][공통]   중단영업관련 현금흐름(IFRS)(천원),,369,cash_flow_statement,thousand_krw,False
+[D800000000][공통]영업투자재무활동 기타현금흐름(IFRS)(천원),,370,cash_flow_statement,thousand_krw,False
+[D860000000][공통]연결범위변동으로 인한 현금의 증가(IFRS)(천원),,371,cash_flow_statement,thousand_krw,False
+[D900010000][공통]환율변동 효과(IFRS)(천원),,372,cash_flow_statement,thousand_krw,False
+[D900010100][공통]현금및현금성자산의 증가(IFRS)(천원),,373,cash_flow_statement,thousand_krw,False
+[D900010200][공통]기초 현금및현금성자산(IFRS)(천원),,374,cash_flow_statement,thousand_krw,False
+[D900010300][공통]기말 현금및현금성자산(IFRS)(천원),,375,cash_flow_statement,thousand_krw,False
+[E100000000][공통]미처분이익잉여금(결손금)(*)(IFRS)(천원),,376,appropriation_statement,thousand_krw,False
+[E100010000][공통]   전기이월미처분이익잉여금(결손금)(IFRS)(천원),,377,appropriation_statement,thousand_krw,False
+[E100010100][공통]   회계정책변경 누적효과(IFRS)(천원),,378,appropriation_statement,thousand_krw,False
+[E100010200][공통]   전기오류수정손익(IFRS)(천원),,379,appropriation_statement,thousand_krw,False
+[E100010300][공통]   중간배당액(IFRS)(천원),,380,appropriation_statement,thousand_krw,False
+[E100010400][공통]   지분법적용으로 인한 이익잉여금 변동(IFRS)(천원),,381,appropriation_statement,thousand_krw,False
+[E100010500][공통]   지분법적용으로 인한 부의 이익잉여금 변동(IFRS)(천원),,382,appropriation_statement,thousand_krw,False
+[E100010600][공통]   이익(주식)소각(IFRS)(천원),,383,appropriation_statement,thousand_krw,False
+[E100010700][공통]   결손보전(IFRS)(천원),,384,appropriation_statement,thousand_krw,False
+[E100010800][공통]   보험수리적손익(IFRS)(천원),,385,appropriation_statement,thousand_krw,False
+[E100010850][공통]   확정급여제도의 재측정요소(IFRS)(천원),,386,appropriation_statement,thousand_krw,False
+[E100010900][공통]   재평가손익(IFRS)(천원),,387,appropriation_statement,thousand_krw,False
+[E100099000][공통]   기타(IFRS)(천원),,388,appropriation_statement,thousand_krw,False
+[E100099100][공통]   당기순이익(순손실)(IFRS)(천원),,389,appropriation_statement,thousand_krw,False
+[E200000000][공통]임의적립금등의 이입액(*)(IFRS)(천원),,390,appropriation_statement,thousand_krw,False
+[E200010000][공통]   해외시장개척준비금(IFRS)(천원),,391,appropriation_statement,thousand_krw,False
+[E200010100][공통]   해외투자손실준비금(IFRS)(천원),,392,appropriation_statement,thousand_krw,False
+[E200010200][공통]   연구및인력개발준비금(IFRS)(천원),,393,appropriation_statement,thousand_krw,False
+[E200010300][공통]   수출손실준비금(IFRS)(천원),,394,appropriation_statement,thousand_krw,False
+[E200010400][공통]   중소기업투자준비금(IFRS)(천원),,395,appropriation_statement,thousand_krw,False
+[E200010500][공통]   사업손실준비금(IFRS)(천원),,396,appropriation_statement,thousand_krw,False
+[E200099000][공통]   기타(IFRS)(천원),,397,appropriation_statement,thousand_krw,False
+[E300000000][공통]이익잉여금처분액(결손금처리액)(*)(IFRS)(천원),,398,appropriation_statement,thousand_krw,False
+[E300010000][공통]   이익준비금(IFRS)(천원),,399,appropriation_statement,thousand_krw,False
+[E300010100][공통]   기업합리화적립금(IFRS)(천원),,400,appropriation_statement,thousand_krw,False
+[E300010200][공통]   재무구조개선적립금(IFRS)(천원),,401,appropriation_statement,thousand_krw,False
+[E300010300][공통]   연구인력개발준비금(IFRS)(천원),,402,appropriation_statement,thousand_krw,False
+[E300010400][공통]   기타법정적립금(IFRS)(천원),,403,appropriation_statement,thousand_krw,False
+[E300010500][공통]   주식할인발행차금상각액(IFRS)(천원),,404,appropriation_statement,thousand_krw,False
+[E300010600][공통]   자기주식처분손실잔액상각액(IFRS)(천원),,405,appropriation_statement,thousand_krw,False
+[E300010700][공통]   상환주식상환액(IFRS)(천원),,406,appropriation_statement,thousand_krw,False
+[E300010800][공통]   주식소각액(IFRS)(천원),,407,appropriation_statement,thousand_krw,False
+[E300010900][공통]   배당금(*)(IFRS)(천원),,408,appropriation_statement,thousand_krw,False
+[E300011000][공통]      현금배당(IFRS)(천원),,409,appropriation_statement,thousand_krw,False
+[E300011100][공통]      주식배당(IFRS)(천원),,410,appropriation_statement,thousand_krw,False
+[E300011200][공통]   임의적립금(IFRS)(천원),,411,appropriation_statement,thousand_krw,False
+[E300011300][공통]   사업확장적립금(IFRS)(천원),,412,appropriation_statement,thousand_krw,False
+[E300011400][공통]   감채적립금(IFRS)(천원),,413,appropriation_statement,thousand_krw,False
+[E300011500][공통]   임의적립금이입액(결손보전의 경우)(IFRS)(천원),,414,appropriation_statement,thousand_krw,False
+[E300011600][공통]   기타법정적립금이입액(결손보전의 경우)(IFRS)(천원),,415,appropriation_statement,thousand_krw,False
+[E300011700][공통]   기업합리화적립금이입액(결손보전의 경우)(IFRS)(천원),,416,appropriation_statement,thousand_krw,False
+[E300011800][공통]   재무구조개선적립금이입액(결손보전의 경우)(IFRS)(천원),,417,appropriation_statement,thousand_krw,False
+[E300011900][공통]   이익준비금이입액(결손보전의 경우)(IFRS)(천원),,418,appropriation_statement,thousand_krw,False
+[E300012000][공통]   자본잉여금이입액(결손보전의 경우)(IFRS)(천원),,419,appropriation_statement,thousand_krw,False
+[E300012100][공통]   기타결손금처리액(결손보전의 경우)(IFRS)(천원),,420,appropriation_statement,thousand_krw,False
+[E300099000][공통]   기타(IFRS)(천원),,421,appropriation_statement,thousand_krw,False
+[E400000000][공통]차기이월미처분이익잉여금(결손금)(IFRS)(천원),,422,appropriation_statement,thousand_krw,False
+[공통]총자본증가율(IFRS),asset_growth_percent,423,market_or_ratio,ratio_or_percent,True
+[공통]자기자본증가율(IFRS),,424,market_or_ratio,ratio_or_percent,False
+[공통]매출액증가율(IFRS),sales_growth_percent,425,market_or_ratio,ratio_or_percent,True
+[공통]정상영업이익증가율(IFRS),,426,market_or_ratio,ratio_or_percent,False
+[공통]순이익증가율(IFRS),,427,market_or_ratio,ratio_or_percent,False
+[공통]총포괄이익증가율(IFRS),,428,market_or_ratio,ratio_or_percent,False
+[공통]종업원1인당 부가가치증가율(IFRS),,429,market_or_ratio,ratio_or_percent,False
+[공통]종업원수증가율(IFRS),,430,market_or_ratio,ratio_or_percent,False
+[공통]종업원1인당 매출액증가율(IFRS),,431,market_or_ratio,ratio_or_percent,False
+[공통]종업원1인당 인건비증가율(IFRS),,432,market_or_ratio,ratio_or_percent,False
+[공통]매출액정상영업이익률(IFRS),operating_margin_percent,433,market_or_ratio,,True
+[공통]매출액순이익률(IFRS),net_margin_percent,434,market_or_ratio,,True
+[공통]총자본사업이익률(IFRS),,435,market_or_ratio,,False
+[공통]총자본정상영업이익률(IFRS),,436,market_or_ratio,,False
+[공통]총자본순이익률(IFRS),roa_percent,437,market_or_ratio,,True
+[공통]자기자본정상영업이익률(IFRS),,438,market_or_ratio,,False
+[공통]자기자본순이익률(IFRS),roe_percent,439,market_or_ratio,,True
+[공통]자본금정상영업이익률(IFRS),,440,market_or_ratio,,False
+[공통]자본금순이익률(IFRS),,441,market_or_ratio,,False
+[공통]영업비용 대 영업수익비율(IFRS),,442,market_or_ratio,ratio_or_percent,False
+[공통]수지비율(관계기업투자손익 제외)(IFRS),,443,market_or_ratio,ratio_or_percent,False
+[공통]세금과공과 대 총비용비율(IFRS),,444,market_or_ratio,ratio_or_percent,False
+[공통]유보율(IFRS),,445,market_or_ratio,ratio_or_percent,False
+[공통]사내유보율(IFRS),,446,market_or_ratio,ratio_or_percent,False
+[공통]사내유보 대 자기자본비율(IFRS),,447,market_or_ratio,ratio_or_percent,False
+[공통]적립금비율(재정비율)(IFRS),,448,market_or_ratio,ratio_or_percent,False
+[공통]평균배당률(IFRS),,449,market_or_ratio,,False
+[공통]자기자본배당률(IFRS),,450,market_or_ratio,,False
+[공통]배당성향(IFRS),,451,market_or_ratio,,False
+[공통]1주당매출액(IFRS)(원),sales_per_share,452,market_or_ratio,krw,True
+[공통]1주당순이익(IFRS)(원),,453,market_or_ratio,krw,False
+[공통]1주당 CASH FLOW(IFRS)(원),,454,market_or_ratio,krw,False
+[공통]1주당순자산(IFRS)(원),,455,market_or_ratio,krw,False
+[공통]1주당정상영업이익(IFRS)(원),,456,market_or_ratio,krw,False
+[공통]자기자본구성비율(IFRS),,457,market_or_ratio,ratio_or_percent,False
+[공통]타인자본구성비율(IFRS),,458,market_or_ratio,ratio_or_percent,False
+[공통]부채비율(IFRS),debt_ratio_percent,459,market_or_ratio,ratio_or_percent,True
+[공통]차입금의존도(IFRS),,460,market_or_ratio,,False
+[공통]차입금비율(IFRS),,461,market_or_ratio,ratio_or_percent,False
+[공통]유보액대비율(IFRS),,462,market_or_ratio,ratio_or_percent,False
+[공통]CASH FLOW 대 총자본비율(IFRS),,463,market_or_ratio,ratio_or_percent,False
+[공통]총자본회전률(IFRS),,464,market_or_ratio,,False
+[공통]자기자본회전률(IFRS),,465,market_or_ratio,,False
+[공통]자본금회전률(IFRS),,466,market_or_ratio,,False
+[공통]타인자본회전률(IFRS),,467,market_or_ratio,,False
+[공통]부가가치(IFRS)(백만원),,468,market_or_ratio,,False
+[공통]종업원1인당 부가가치(IFRS)(백만원),,469,market_or_ratio,,False
+[공통]종업원1인당 매출액(IFRS)(백만원),,470,market_or_ratio,,False
+[공통]종업원1인당 정상영업이익(IFRS)(백만원),,471,market_or_ratio,,False
+[공통]종업원1인당 순이익(IFRS)(백만원),,472,market_or_ratio,,False
+[공통]종업원1인당 인건비(IFRS)(백만원),,473,market_or_ratio,,False
+[공통]자본집약도(IFRS),,474,market_or_ratio,,False
+[공통]총자본투자효율(IFRS),,475,market_or_ratio,ratio_or_percent,False
+[공통]부가가치율(IFRS),,476,market_or_ratio,ratio_or_percent,False
+[공통]노동소득분배율(IFRS),,477,market_or_ratio,ratio_or_percent,False
+[공통]자본분배율(IFRS),,478,market_or_ratio,ratio_or_percent,False
+[공통]PER(최고)(IFRS),per_high,479,market_or_ratio,ratio_or_percent,True
+[공통]PER(최저)(IFRS),per_low,480,market_or_ratio,ratio_or_percent,True
+[공통]PBR(최고)(IFRS),pbr_high,481,market_or_ratio,ratio_or_percent,True
+[공통]PBR(최저)(IFRS),pbr_low,482,market_or_ratio,ratio_or_percent,True
+[공통]PCR(최고)(IFRS),pcr_high,483,market_or_ratio,ratio_or_percent,True
+[공통]PCR(최저)(IFRS),pcr_low,484,market_or_ratio,ratio_or_percent,True
+[공통]PSR(최고)(IFRS),psr_high,485,market_or_ratio,ratio_or_percent,True
+[공통]PSR(최저)(IFRS),psr_low,486,market_or_ratio,ratio_or_percent,True
+[공통]거래소코드,,487,market_or_ratio,,False
+[공통]거래년도(*),,488,market_or_ratio,,False
+[공통]거래월(*),,489,market_or_ratio,,False
+[공통]거래일수,,490,market_or_ratio,,False
+[공통]최고가(원),,491,market_or_ratio,krw,False
+[공통]최저가(원),,492,market_or_ratio,krw,False
+[공통]산술평균(원),,493,market_or_ratio,krw,False
+[공통]종가(원),close,494,market_or_ratio,krw,True
+[공통]거래량(주),volume,495,market_or_ratio,shares,True
+[공통]거래대금(백원),trading_value_100krw,496,market_or_ratio,hundred_krw,True

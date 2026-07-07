@@ -1,0 +1,10 @@
+﻿severity,check,detail
+info,missing_assets,186
+info,missing_equity,186
+info,missing_net_income,186
+info,missing_operating_cash_flow,186
+info,missing_market_cap,611
+info,missing_pbr,649
+info,missing_roe,266
+info,missing_roa,186
+info,missing_debt_ratio,186

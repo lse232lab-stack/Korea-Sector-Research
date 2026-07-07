@@ -1,0 +1,16 @@
+price:
+  provider: kis
+  output: data/raw/price/prices.csv
+  request_sleep_seconds: 1.0
+  daily_chart:
+    endpoint: /uapi/domestic-stock/v1/quotations/inquire-daily-itemchartprice
+    market_div_code: J
+    period_div_code: D
+    adjusted_price: true
+
+env:
+  default_file: .env
+  required:
+    - KIS_APP_KEY
+    - KIS_APP_SECRET
+    - KIS_BASE_URL

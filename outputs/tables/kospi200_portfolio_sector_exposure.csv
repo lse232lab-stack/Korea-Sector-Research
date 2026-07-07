@@ -1,0 +1,21 @@
+﻿weighting_method,sector,weight,names
+equal_weight,Consumer Discretionary,0.25,11
+equal_weight,Constructions,0.1973684210526316,5
+equal_weight,IT,0.15789473684210528,4
+equal_weight,Energy & Chemicals,0.11842105263157895,3
+equal_weight,Communication Services,0.07894736842105264,2
+equal_weight,Consumer Staples,0.03947368421052632,1
+equal_weight,Financials,0.03947368421052632,1
+equal_weight,Heavy Industries,0.03947368421052632,1
+equal_weight,Industrials,0.03947368421052632,1
+equal_weight,Steels & Materials,0.03947368421052632,1
+score_weight,Consumer Discretionary,0.25,11
+score_weight,Constructions,0.18112480996308591,5
+score_weight,IT,0.15543887005849197,4
+score_weight,Energy & Chemicals,0.1205354729129435,3
+score_weight,Communication Services,0.07000593263924665,2
+score_weight,Consumer Staples,0.05,1
+score_weight,Industrials,0.047864711955122784,1
+score_weight,Heavy Industries,0.045917629002655835,1
+score_weight,Financials,0.03959236043031724,1
+score_weight,Steels & Materials,0.039520213038136104,1

@@ -1,0 +1,2 @@
+﻿series,observations,mean,volatility_daily,annualized_volatility,skewness,kurtosis,excess_kurtosis,empirical_1pct,normal_implied_1pct,empirical_5pct,normal_implied_5pct
+universe_equal_weight_daily_return,4805,0.000605119214568019,0.012815339066903545,0.20343720082798394,-0.6327020537165833,14.427539296213997,11.427539296213997,-0.03699845089536235,-0.029203359455049628,-0.018299592405163653,-0.020476113550488312

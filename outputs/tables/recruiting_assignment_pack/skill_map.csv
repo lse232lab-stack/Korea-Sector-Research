@@ -1,0 +1,11 @@
+﻿question,assignment_theme,demonstrated_skill,project_artifact
+Q50,Covariance Matrix / Minimum Variance Portfolio,"공분산 행렬, 최적화, rolling window",q50_min_variance_latest_weights.csv
+Q52,PCA on monthly returns,"차원축소, 시장 공통요인 해석",q52_pca_summary.csv
+Q54,Low-volatility strategy bootstrap,"전략 성과 검정, bootstrap CI",q54_low_vol_bootstrap.csv
+Q56,Momentum skip-month test,"모멘텀 정의 비교, 반전효과 점검",q56_momentum_skip_month_comparison.csv
+Q57,Transaction-cost sensitivity,실무 거래비용 가정과 성과 민감도,q57_transaction_cost_sensitivity.csv
+Q58,Equal / volatility / risk-parity weighting,포트폴리오 가중 방식 비교,q58_weighting_comparison.csv
+Q59,Fat-tail diagnostics,"왜도, 첨도, tail risk",q59_fat_tail_summary.csv
+Q60,Correlation breakdown in stress periods,상관 상승과 분산효과 붕괴,q60_correlation_breakdown.csv
+Q76,Lagging rule / look-ahead bias,재무정보 사용 가능일 통제,existing integrated factor pipeline
+Q99,End-to-end pipeline,수집-정제-팩터-검증-리포트 자동화,main.py pipeline steps

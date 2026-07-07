@@ -1,0 +1,3 @@
+﻿momentum_definition,months,mean_monthly_excess_return,annualized_excess_return,volatility_of_monthly_excess,positive_month_rate
+include_recent_1m,221,0.008810927046275055,0.11100837406779274,0.04388161321696275,0.5656108597285068
+exclude_recent_1m,221,0.008298865297116277,0.10426000140735625,0.04014022723606899,0.5882352941176471

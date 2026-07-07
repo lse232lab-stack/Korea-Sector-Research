@@ -1,0 +1,2 @@
+﻿year,start_date,end_date,output_path,rows,tickers,min_date,max_date
+2026,20260101,20260630,data/raw/price/yearly/prices_2026.csv,24000,200,2026-01-02,2026-06-30

@@ -1,0 +1,29 @@
+backtest:
+  start_date: null
+  end_date: null
+  rebalance_frequency: monthly
+  signal_date: month_end
+  execution_date: next_month_first_trading_day
+  benchmark: KOSPI200
+
+portfolio:
+  top_n: 30
+  weighting_methods:
+    - equal_weight
+    - score_weight
+  max_single_name_weight: 0.05
+  max_sector_weight: 0.25
+  liquidity_filter:
+    enabled: true
+    lookback_days: 20
+    metric: average_trading_value
+    minimum_krw: null
+
+costs:
+  buy_cost_bps: 10
+  sell_cost_bps: 10
+
+performance:
+  risk_free_rate_annual: 0.0
+  periods_per_year: 12
+  report_gross_and_net: true

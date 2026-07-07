@@ -1,0 +1,2 @@
+﻿days,total_return,cagr,annualized_volatility,sharpe,max_drawdown,win_rate,benchmark_total_return,active_total_return,tracking_error,information_ratio,average_turnover,rebalance_count,benchmark_type,benchmark_path
+711,1.092810273617765,0.29920117771322396,0.20729868422347214,1.4433337038969292,-0.1520905011381839,0.5443037974683544,1.0179934024191084,0.03707488394608638,0.14079372044141322,0.10330075880404668,0.22190476190476194,35,external_benchmark,data/raw/benchmark/kodex200_prices.csv

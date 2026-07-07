@@ -1,0 +1,42 @@
+preprocessing:
+  winsorize:
+    lower_quantile: 0.01
+    upper_quantile: 0.99
+  standardize: zscore
+  missing_value_policy:
+    cross_sectional_median: true
+    require_minimum_valid_observations: true
+  sector_neutralization:
+    enabled: false
+    method: demean_by_sector
+
+factors:
+  value:
+    metrics:
+      pbr: lower_is_better
+      per: lower_is_better
+      psr: lower_is_better
+      ev_ebitda: lower_is_better
+  quality:
+    metrics:
+      roe: higher_is_better
+      roa: higher_is_better
+      operating_margin: higher_is_better
+      debt_ratio: lower_is_better
+      operating_cash_flow_to_net_income: higher_is_better
+  momentum:
+    metrics:
+      return_6m: higher_is_better
+      return_12m_ex_1m: higher_is_better
+      relative_return_12m_ex_1m: higher_is_better
+  low_volatility:
+    metrics:
+      volatility_1y: lower_is_better
+      beta_1y: lower_is_better
+      max_drawdown_1y: lower_is_better
+
+composite:
+  quality: 0.30
+  value: 0.25
+  momentum: 0.25
+  low_volatility: 0.20

@@ -1,0 +1,17 @@
+universe:
+  name: KOSPI200
+  base_currency: KRW
+  initial_mode: current_constituents
+  preferred_mode: point_in_time_constituents
+  exclude:
+    preferred_shares: true
+    spac: true
+    administrative_issues: true
+    suspended_trading: true
+  notes:
+    - If point-in-time constituents are unavailable, current KOSPI200 constituents may be used for the MVP.
+    - When current constituents are used, survivorship bias must be disclosed in the report.
+
+files:
+  constituents: data/raw/benchmark/kospi200_constituents.csv
+  sector_map: data/raw/benchmark/sector_map.csv

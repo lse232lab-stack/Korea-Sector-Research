@@ -1,0 +1,11 @@
+﻿strategy_id,strategy_name,category,description,weights
+deep_value,Deep Value,valuation,저평가 종목군에 집중하는 전통적 가치 전략,value_score=1.00
+quality_compounder,Quality Compounder,fundamental,"수익성, 안정성, 재무 건전성이 우수한 기업 선호",quality_score=1.00
+earnings_growth,Earnings Growth,fundamental,실적 성장성과 개선 흐름이 강한 종목 선호,growth_score=1.00
+price_momentum,Price Momentum,price,12개월-1개월 가격 모멘텀이 강한 종목 선호,momentum_score=1.00
+low_volatility,Low Volatility,defensive,낙폭과 변동성이 낮은 방어적 종목 선호,low_volatility_score=1.00
+balanced_multifactor,Balanced Multi-Factor,multi_factor,"Value, Quality, Growth, Momentum, Low Volatility 균형 결합","quality_score=0.25, value_score=0.25, momentum_score=0.20, low_volatility_score=0.20, growth_score=0.10"
+value_momentum_barbell,Value + Momentum Barbell,multi_factor,저평가와 가격추세를 동시에 요구하는 실무형 조합,"value_score=0.35, momentum_score=0.35, quality_score=0.15, low_volatility_score=0.15"
+quality_low_vol_defensive,Quality + Low Vol Defensive,defensive,하락장 대응을 의식한 퀄리티와 저변동성 중심 전략,"quality_score=0.45, low_volatility_score=0.45, value_score=0.10"
+momentum_growth_aggressive,Momentum + Growth Aggressive,aggressive,강한 가격추세와 실적 성장성을 결합한 공격형 알파 전략,"momentum_score=0.60, growth_score=0.25, quality_score=0.15"
+ml_predicted_return,ML Predicted Return,machine_learning,Ridge 모델의 1개월 초과수익률 예측치를 랭킹 신호로 사용,ml_predicted_excess_forward_1m_return=1.00

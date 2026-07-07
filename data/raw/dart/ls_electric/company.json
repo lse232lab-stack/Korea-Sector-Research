@@ -1,0 +1,21 @@
+{
+  "status": "000",
+  "message": "정상",
+  "corp_code": "00105855",
+  "corp_name": "엘에스일렉트릭 주식회사",
+  "corp_name_eng": "LS ELECTRIC CO., LTD",
+  "stock_name": "엘에스일렉트릭",
+  "stock_code": "010120",
+  "ceo_nm": "구자균, 채대석",
+  "corp_cls": "Y",
+  "jurir_no": "1101110520076",
+  "bizr_no": "1168119273",
+  "adres": "경기도 안양시 동안구  엘에스로 127 LS타워",
+  "hm_url": "www.ls-electric.com",
+  "ir_url": "",
+  "phn_no": "02-2034-4184",
+  "fax_no": "02-2034-4260",
+  "induty_code": "28121",
+  "est_dt": "19740724",
+  "acc_mt": "12"
+}

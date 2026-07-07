@@ -1,0 +1,2 @@
+﻿days,total_return,cagr,annualized_volatility,sharpe,max_drawdown,win_rate,benchmark_total_return,active_total_return,tracking_error,information_ratio,average_turnover,rebalance_count,benchmark_type,benchmark_path
+4661,3.916969805066593,0.08992616373231277,0.21923763589806186,0.41017667137281766,-0.5380849120191119,0.5290710148036902,6.9401504405704895,-0.3807460145914673,0.09196875900675885,-0.24772502043370165,0.18663729809104254,227,universe_equal_weight,
