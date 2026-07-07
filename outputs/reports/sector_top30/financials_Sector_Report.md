@@ -11,8 +11,10 @@ Universe: Latest KOSPI200 quant Top30
 - Primary valuation: PBR/ROE
 - Cross-check: PER, earnings yield, shareholder-return capacity
 - 핵심 드라이버: ROE sustainability, CET1/capital buffer proxy, dividend/buyback policy, credit cost cycle
-- 섹터 분류 원천: KOSPI200 constituent sector
+- 섹터 분류 원천: master/KOSPI200
 - DART 재무 커버리지: 100.0%
+- DART 원문 KPI 커버리지: 100.0%
+- 평균 analyst note readiness: 97.1%
 
 ## Thesis
 

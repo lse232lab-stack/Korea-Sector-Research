@@ -17,6 +17,8 @@ from src.data.ts2000_wide_loader import prepare_long_horizon_fundamentals
 from src.data.universe import fetch_kospi200_constituents_from_wikipedia
 from src.data.validator import write_data_validation_outputs
 from src.data.dart_batch import fetch_top30_dart_data
+from src.data.dart_text_kpi import build_dart_text_kpis
+from src.data.sector_master import build_sector_master
 from src.factors.integrated import build_integrated_factor_scores
 from src.factors.pipeline import build_fundamental_factor_scores, build_price_factor_scores
 from src.portfolio.construction import build_kospi200_model_portfolio_preview
@@ -47,7 +49,9 @@ def parse_args() -> argparse.Namespace:
             "fetch-long-prices",
             "combine-yearly-prices",
             "fetch-top30-dart",
+            "extract-dart-kpis",
             "fetch-universe",
+            "build-sector-master",
             "prepare-fundamentals",
             "prepare-long-fundamentals",
             "build-factors",
@@ -238,6 +242,11 @@ def parse_args() -> argparse.Namespace:
         help="Number of latest quant-ranked names to include in sector reports.",
     )
     parser.add_argument(
+        "--sector-master-path",
+        default="data/raw/sector/sector_master.csv",
+        help="Analyst sector master path for --step generate-sector-reports.",
+    )
+    parser.add_argument(
         "--dart-output-dir",
         default="data/raw/dart/top30",
         help="Output directory for --step fetch-top30-dart.",
@@ -246,6 +255,17 @@ def parse_args() -> argparse.Namespace:
         "--dart-end-date",
         default="20260707",
         help="End date as YYYYMMDD for --step fetch-top30-dart filing lookup.",
+    )
+    parser.add_argument(
+        "--fetch-dart-documents",
+        action="store_true",
+        help="Download latest OpenDART report documents for --step extract-dart-kpis.",
+    )
+    parser.add_argument(
+        "--max-dart-documents",
+        type=int,
+        default=None,
+        help="Optional max document count for --step extract-dart-kpis.",
     )
     parser.add_argument(
         "--initial-cash",
@@ -369,6 +389,34 @@ def main() -> None:
         print(f"Saved {result.filings_path}")
         print(f"Saved {result.single_accounts_path}")
         print(f"Saved {result.fetch_summary_path}")
+        return
+
+    if args.step == "extract-dart-kpis":
+        result = build_dart_text_kpis(
+            filings_path=f"{args.dart_output_dir}/filings.csv",
+            output_dir=args.dart_output_dir,
+            env_file=args.env_file,
+            fetch_documents=args.fetch_dart_documents,
+            max_documents=args.max_dart_documents,
+        )
+        print(f"Saved {result.kpi_path}")
+        print(f"Saved {result.snippet_path}")
+        print(f"Documents: {result.document_dir}")
+        return
+
+    if args.step == "build-sector-master":
+        sector_fundamentals_path = (
+            "data/raw/ts2000/fundamentals_long.csv"
+            if args.fundamentals_path == "data/raw/ts2000/fundamentals.csv"
+            else args.fundamentals_path
+        )
+        result = build_sector_master(
+            universe_path=args.universe_path,
+            dart_company_path=f"{args.dart_output_dir}/company_profiles.csv",
+            fundamentals_path=sector_fundamentals_path,
+        )
+        print(f"Saved {result.output_path}")
+        print(f"Saved {result.coverage_path}")
         return
 
     if args.step == "prepare-fundamentals":
@@ -673,8 +721,10 @@ def main() -> None:
             fundamentals_path=sector_fundamentals_path,
             price_path=sector_price_path,
             universe_path=args.universe_path,
+            sector_master_path=args.sector_master_path,
             dart_company_path=f"{args.dart_output_dir}/company_profiles.csv",
             dart_accounts_path=f"{args.dart_output_dir}/single_accounts.csv",
+            dart_text_kpi_path=f"{args.dart_output_dir}/dart_text_kpis.csv",
             output_dir=args.sector_report_output_dir,
             top_n=args.sector_report_top_n,
         )

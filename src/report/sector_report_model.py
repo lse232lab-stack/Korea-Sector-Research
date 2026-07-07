@@ -55,8 +55,10 @@ def generate_sector_reports(
     fundamentals_path: str | Path = "data/raw/ts2000/fundamentals_long.csv",
     price_path: str | Path = "data/raw/price/prices_2007_2026.csv",
     universe_path: str | Path = "data/raw/benchmark/kospi200_constituents.csv",
+    sector_master_path: str | Path = "data/raw/sector/sector_master.csv",
     dart_company_path: str | Path = "data/raw/dart/top30/company_profiles.csv",
     dart_accounts_path: str | Path = "data/raw/dart/top30/single_accounts.csv",
+    dart_text_kpi_path: str | Path = "data/raw/dart/top30/dart_text_kpis.csv",
     output_dir: str | Path = "outputs/reports/sector_top30",
     top_n: int = 30,
 ) -> SectorReportResult:
@@ -70,8 +72,10 @@ def generate_sector_reports(
         fundamentals_path=fundamentals_path,
         price_path=price_path,
         universe_path=universe_path,
+        sector_master_path=sector_master_path,
         dart_company_path=dart_company_path,
         dart_accounts_path=dart_accounts_path,
+        dart_text_kpi_path=dart_text_kpi_path,
         top_n=top_n,
     )
     sector_summary = build_sector_summary(top)
@@ -113,8 +117,10 @@ def build_top_sector_dataset(
     fundamentals_path: str | Path,
     price_path: str | Path,
     universe_path: str | Path,
+    sector_master_path: str | Path,
     dart_company_path: str | Path,
     dart_accounts_path: str | Path,
+    dart_text_kpi_path: str | Path,
     top_n: int,
 ) -> pd.DataFrame:
     scores = pd.read_csv(ROOT / score_path, dtype={"ticker": "string"}, parse_dates=["signal_date"])
@@ -164,16 +170,21 @@ def build_top_sector_dataset(
     top = latest_scores.merge(latest_fundamentals, on="ticker", how="left", suffixes=("", "_fundamental"))
     top["name"] = top["name"].fillna(top["name_fundamental"])
     top = top.merge(latest_prices, on="ticker", how="left")
+    top = _merge_sector_master(top, sector_master_path)
     top = _merge_universe_sector(top, universe_path)
     top = _merge_dart_company(top, dart_company_path)
     top = _merge_dart_accounts(top, dart_accounts_path)
+    top = _merge_dart_text_kpis(top, dart_text_kpi_path)
     top["financial_data_basis"] = top.get("financial_data_basis", pd.Series(index=top.index, dtype="string")).fillna("TS2000 annual")
     top["eps"] = top["net_income"] / top["shares_outstanding"]
     top["bps"] = top["equity"] / top["shares_outstanding"]
     top["current_per"] = top["adj_close"] / top["eps"]
     top["current_pbr"] = top["adj_close"] / top["bps"]
     top["market_cap_proxy"] = top["adj_close"] * top["shares_outstanding"]
+    top["enterprise_value_proxy"] = top["market_cap_proxy"] + top["net_debt_proxy"].fillna(0)
     top["current_psr"] = top["market_cap_proxy"] / top["revenue"]
+    top["ev_ebitda_proxy"] = top["enterprise_value_proxy"] / top["ebitda_proxy"]
+    top["net_debt_to_equity"] = top["net_debt_proxy"] / top["equity"]
     top["earnings_yield"] = top["net_income"] / top["market_cap_proxy"]
     top["op_income_yield"] = top["operating_income"] / top["market_cap_proxy"]
     top["book_discount_proxy"] = 1 - top["current_pbr"]
@@ -200,6 +211,8 @@ def build_sector_summary(top: pd.DataFrame) -> pd.DataFrame:
                 "median_per_positive": positive_per.median(),
                 "median_pbr": frame["current_pbr"].median(),
                 "median_psr": frame["current_psr"].median(),
+                "median_ev_ebitda_proxy": frame["ev_ebitda_proxy"].where(frame["ev_ebitda_proxy"] > 0).median(),
+                "median_net_debt_to_equity": frame["net_debt_to_equity"].median(),
                 "median_earnings_yield": frame["earnings_yield"].median(),
                 "median_op_income_yield": frame["op_income_yield"].median(),
                 "avg_roe": frame["roe"].mean(),
@@ -207,10 +220,30 @@ def build_sector_summary(top: pd.DataFrame) -> pd.DataFrame:
                 "avg_sales_growth": frame["sales_growth"].mean(),
                 "total_market_cap_proxy": frame["market_cap_proxy"].sum(),
                 "dart_coverage": frame["financial_data_basis"].astype(str).str.contains("OpenDART", na=False).mean(),
+                "dart_text_kpi_coverage": frame["analyst_note_readiness"].notna().mean(),
+                "avg_analyst_note_readiness": frame["analyst_note_readiness"].mean(),
                 "primary_sector_source": frame["sector_source"].mode().iloc[0] if not frame["sector_source"].mode().empty else "fallback",
             }
         )
     return pd.DataFrame(rows).sort_values(["count", "avg_composite_score"], ascending=[False, False])
+
+
+def _merge_sector_master(top: pd.DataFrame, sector_master_path: str | Path) -> pd.DataFrame:
+    path = ROOT / sector_master_path
+    if not path.exists():
+        top["analyst_sector"] = pd.NA
+        top["sector_master_source"] = pd.NA
+        top["valuation_family"] = pd.NA
+        return top
+    master = pd.read_csv(path, dtype={"ticker": "string"})
+    master["ticker"] = master["ticker"].astype("string").str.zfill(6)
+    keep = [
+        col
+        for col in ["ticker", "analyst_sector", "sector_source", "valuation_family", "confidence"]
+        if col in master.columns
+    ]
+    master = master[keep].rename(columns={"sector_source": "sector_master_source", "confidence": "sector_master_confidence"})
+    return top.merge(master, on="ticker", how="left")
 
 
 def _merge_universe_sector(top: pd.DataFrame, universe_path: str | Path) -> pd.DataFrame:
@@ -244,10 +277,14 @@ def _merge_dart_accounts(top: pd.DataFrame, dart_accounts_path: str | Path) -> p
     path = ROOT / dart_accounts_path
     if not path.exists():
         top["financial_data_basis"] = "TS2000 annual"
+        top["ebitda_proxy"] = pd.NA
+        top["net_debt_proxy"] = pd.NA
         return top
     accounts = pd.read_csv(path, dtype={"ticker": "string", "stock_code": "string", "fs_div": "string", "account_nm": "string"})
     if accounts.empty or "account_nm" not in accounts.columns:
         top["financial_data_basis"] = "TS2000 annual"
+        top["ebitda_proxy"] = pd.NA
+        top["net_debt_proxy"] = pd.NA
         return top
     ticker_col = "ticker" if "ticker" in accounts.columns else "stock_code"
     accounts["ticker"] = accounts[ticker_col].astype("string").str.zfill(6)
@@ -271,6 +308,8 @@ def _merge_dart_accounts(top: pd.DataFrame, dart_accounts_path: str | Path) -> p
             rows.append(metrics)
     if not rows:
         top["financial_data_basis"] = "TS2000 annual"
+        top["ebitda_proxy"] = pd.NA
+        top["net_debt_proxy"] = pd.NA
         return top
     dart_metrics = pd.DataFrame(rows)
     merged = top.merge(dart_metrics, on="ticker", how="left", suffixes=("", "_dart"))
@@ -280,6 +319,9 @@ def _merge_dart_accounts(top: pd.DataFrame, dart_accounts_path: str | Path) -> p
             merged[column] = merged[dart_col].combine_first(merged[column])
             merged = merged.drop(columns=[dart_col])
     merged["financial_data_basis"] = merged["financial_data_basis"].fillna("TS2000 annual")
+    for column in ["ebitda_proxy", "net_debt_proxy", "total_assets", "total_liabilities", "interest_expense", "interest_income"]:
+        if column not in merged.columns:
+            merged[column] = pd.NA
     return merged
 
 
@@ -289,6 +331,15 @@ def _extract_dart_financial_metrics(frame: pd.DataFrame) -> dict[str, float]:
         "operating_income": ["영업이익", "영업손실"],
         "net_income": ["당기순이익", "당기순손실", "분기순이익", "반기순이익"],
         "equity": ["자본총계", "자본"],
+        "total_assets": ["자산총계"],
+        "total_liabilities": ["부채총계"],
+        "current_liabilities": ["유동부채"],
+        "noncurrent_liabilities": ["비유동부채"],
+        "cash_and_equivalents": ["현금및현금성자산", "현금 및 현금성자산", "현금성자산"],
+        "borrowings": ["차입금", "차입부채", "사채"],
+        "interest_expense": ["이자비용"],
+        "interest_income": ["이자수익"],
+        "depreciation_amortization": ["감가상각비", "감가상각", "상각비"],
     }
     metrics: dict[str, float] = {}
     for metric, names in account_map.items():
@@ -298,7 +349,44 @@ def _extract_dart_financial_metrics(frame: pd.DataFrame) -> dict[str, float]:
             match = frame[frame["account_nm"].astype(str).str.contains(pattern, regex=True, na=False)]
         if not match.empty:
             metrics[metric] = match.dropna(subset=["amount"]).iloc[-1]["amount"]
+    op = metrics.get("operating_income")
+    da = metrics.get("depreciation_amortization")
+    if op is not None:
+        metrics["ebitda_proxy"] = op + (da if da is not None else 0)
+    borrowings = metrics.get("borrowings")
+    cash = metrics.get("cash_and_equivalents")
+    if borrowings is not None:
+        metrics["net_debt_proxy"] = borrowings - (cash if cash is not None else 0)
+    elif metrics.get("total_liabilities") is not None and metrics.get("current_liabilities") is not None:
+        # Fallback when detailed debt lines are unavailable in OpenDART's single-account API.
+        metrics["net_debt_proxy"] = metrics["total_liabilities"] - metrics["current_liabilities"]
     return metrics
+
+
+def _merge_dart_text_kpis(top: pd.DataFrame, dart_text_kpi_path: str | Path) -> pd.DataFrame:
+    path = ROOT / dart_text_kpi_path
+    kpi_columns = [
+        "analyst_note_readiness",
+        "backlog_evidence",
+        "segment_sales_evidence",
+        "net_debt_evidence",
+        "ebitda_evidence",
+        "nav_evidence",
+        "guidance_evidence",
+        "margin_risk_evidence",
+    ]
+    if not path.exists():
+        for column in kpi_columns:
+            top[column] = pd.NA
+        return top
+    kpis = pd.read_csv(path, dtype={"ticker": "string"})
+    if kpis.empty:
+        for column in kpi_columns:
+            top[column] = pd.NA
+        return top
+    kpis["ticker"] = kpis["ticker"].astype("string").str.zfill(6)
+    keep = ["ticker", *[col for col in kpi_columns if col in kpis.columns]]
+    return top.merge(kpis[keep], on="ticker", how="left")
 
 
 def _parse_amount(value: object) -> float | None:
@@ -318,6 +406,9 @@ def _parse_amount(value: object) -> float | None:
 def _classify_sector(row: pd.Series) -> str:
     ticker = str(row.get("ticker", ""))
     name = str(row.get("name", ""))
+    analyst_sector = _normalize_sector(row.get("analyst_sector"))
+    if analyst_sector:
+        return analyst_sector
     universe_sector = _normalize_sector(row.get("universe_sector"))
     if universe_sector:
         return universe_sector
@@ -378,6 +469,15 @@ def _classify_sector(row: pd.Series) -> str:
 
 
 def _sector_source(row: pd.Series) -> str:
+    if _normalize_sector(row.get("analyst_sector")):
+        source = row.get("sector_master_source")
+        short = {
+            "kospi200_constituent": "KOSPI200",
+            "manual_override": "manual",
+            "opendart_industry": "OpenDART",
+            "ts2000_sector": "TS2000",
+        }.get(source, source)
+        return f"master/{short}" if isinstance(short, str) and short else "sector master"
     if _normalize_sector(row.get("universe_sector")):
         return "KOSPI200 constituent sector"
     if _normalize_sector(row.get("dart_sector")):
@@ -473,11 +573,11 @@ def _sector_valuation_profile(sector: str) -> SectorValuationProfile:
             primary_method="NAV discount",
             cross_checks="PBR, listed subsidiary value, dividend income, capital allocation",
             key_drivers="상장 자회사 지분가치, 비상장 자산 재평가, 배당/자사주, 지배구조 이벤트",
-            caveat="현재 자동화 모델은 NAV 세부 구성 대신 BPS/PBR을 NAV discount proxy로 사용한다.",
+            caveat="DART 원문에서 관계기업·종속기업·투자주식 evidence를 추출하고, 아직 미상장 자산별 fair value는 수작업 검증한다.",
             table_columns=(
                 ("PBR", "current_pbr"),
                 ("Book Discount Proxy", "book_discount_proxy"),
-                ("ROE", "roe"),
+                ("NAV Evidence", "nav_evidence"),
                 ("PER", "current_per"),
             ),
         ),
@@ -485,24 +585,36 @@ def _sector_valuation_profile(sector: str) -> SectorValuationProfile:
             primary_method="EV/EBITDA or replacement value",
             cross_checks="PBR, operating-income yield, spread/margin cycle",
             key_drivers="제품 스프레드, 원재료 가격, 정제/화학 cycle, 재무구조, capex",
-            caveat="순차입금/EBITDA 데이터가 없어서 본 자동화 초안은 영업이익 yield와 PBR을 proxy로 사용한다.",
+            caveat="OpenDART 단일회사 주요계정에서 순차입금·EBITDA proxy를 계산하되, 정확한 현금/리스/비지배지분 조정은 후속 모델에서 검증한다.",
             table_columns=(
+                ("EV/EBITDA", "ev_ebitda_proxy"),
                 ("PBR", "current_pbr"),
-                ("OP Yield", "op_income_yield"),
+                ("Net Debt/Eq", "net_debt_to_equity"),
                 ("OPM", "operating_margin"),
-                ("Sales Growth", "sales_growth"),
             ),
         ),
         "Construction & Infrastructure": SectorValuationProfile(
             primary_method="PBR plus order/margin cycle",
             cross_checks="PER, OPM, backlog quality, overseas project risk",
             key_drivers="수주잔고, 원가율, 해외 프로젝트 손실 가능성, 주택/플랜트 cycle, 현금흐름",
-            caveat="수주잔고와 프로젝트별 원가율은 DART/IR 추가 수집이 필요하므로 현재는 PBR·OPM proxy로 제시한다.",
+            caveat="DART 원문에서 수주잔고·원가율·공사손실 evidence를 추출하고, 정량 수주잔고 table은 원문 표 구조화 단계에서 확장한다.",
             table_columns=(
                 ("PBR", "current_pbr"),
                 ("PER", "current_per"),
+                ("Backlog Evidence", "backlog_evidence"),
                 ("OPM", "operating_margin"),
-                ("Sales Growth", "sales_growth"),
+            ),
+        ),
+        "Industrials": SectorValuationProfile(
+            primary_method="EV/EBITDA plus order cycle",
+            cross_checks="PBR/ROE, order backlog evidence, margin quality",
+            key_drivers="수주, 납기, 원재료, 방산/전력/기계 cycle, 운전자본",
+            caveat="OpenDART 계정으로 EV/EBITDA proxy를 계산하고 원문에서 order/guidance evidence를 추출한다.",
+            table_columns=(
+                ("EV/EBITDA", "ev_ebitda_proxy"),
+                ("PBR", "current_pbr"),
+                ("Guidance Ev.", "guidance_evidence"),
+                ("OPM", "operating_margin"),
             ),
         ),
         "Auto & Mobility": SectorValuationProfile(
@@ -624,11 +736,13 @@ def _sector_kpi_table(summary: pd.Series, frame: pd.DataFrame, profile: SectorVa
         ["종목 수", f"{int(summary['count'])}", "Top Pick", f"{summary['top_name']} ({summary['top_ticker']})"],
         ["주 valuation", profile.primary_method, "보조 지표", profile.cross_checks],
         ["섹터 원천", summary["primary_sector_source"], "DART 재무 커버리지", _pct(summary["dart_coverage"])],
+        ["DART 원문 커버리지", _pct(summary["dart_text_kpi_coverage"]), "Note readiness", _pct(summary["avg_analyst_note_readiness"])],
         ["평균 퀀트점수", f"{summary['avg_composite_score']:.2f}", "평균 ML", f"{summary['avg_ml_score']:.2f}"],
-        ["중위 PER", _per_multiple(summary["median_per_positive"]), "중위 PBR", _multiple(summary["median_pbr"])],
+        ["중위 PER", _per_multiple(summary["median_per_positive"]), "EV/EBITDA", _multiple(summary["median_ev_ebitda_proxy"])],
+        ["중위 PBR", _multiple(summary["median_pbr"]), "순부채/자본", _multiple(summary["median_net_debt_to_equity"])],
         ["평균 ROE", _pct(summary["avg_roe"]), "평균 OPM", _pct(summary["avg_op_margin"])],
     ]
-    table = Table(data, colWidths=[28 * mm, 36 * mm, 28 * mm, 84 * mm])
+    table = Table(data, colWidths=[28 * mm, 50 * mm, 28 * mm, 70 * mm])
     table.setStyle(_table_style(header=False))
     return table
 
@@ -769,6 +883,8 @@ Universe: Latest KOSPI200 quant Top{top_n}
 - 핵심 드라이버: {profile.key_drivers}
 - 섹터 분류 원천: {summary['primary_sector_source']}
 - DART 재무 커버리지: {_pct(summary['dart_coverage'])}
+- DART 원문 KPI 커버리지: {_pct(summary['dart_text_kpi_coverage'])}
+- 평균 analyst note readiness: {_pct(summary['avg_analyst_note_readiness'])}
 
 ## Thesis
 
@@ -794,15 +910,15 @@ def _build_index_markdown(top: pd.DataFrame, sector_summary: pd.DataFrame, pdf_p
         f"- Generated sectors: {len(sector_summary)}",
         f"- Top{top_n} CSV: `latest_top30_sector_classification.csv`",
         "",
-        "| Sector | Method | Count | DART Coverage | Sector Source | Top Pick | Avg Score | PDF | Markdown |",
-        "|---|---|---:|---:|---|---|---:|---|---|",
+        "| Sector | Method | Count | DART Fin. | DART Text | Sector Source | Top Pick | Avg Score | PDF | Markdown |",
+        "|---|---|---:|---:|---:|---|---|---:|---|---|",
     ]
     for _, row in sector_summary.iterrows():
         slug = _slugify(row["sector_model"])
         pdf = pdf_map.get(slug)
         md = md_map.get(slug)
         lines.append(
-            f"| {row['sector_model']} | {row['primary_method']} | {int(row['count'])} | {_pct(row['dart_coverage'])} | {row['primary_sector_source']} | {row['top_name']} | {row['avg_composite_score']:.2f} | `{pdf.name if pdf else ''}` | `{md.name if md else ''}` |"
+            f"| {row['sector_model']} | {row['primary_method']} | {int(row['count'])} | {_pct(row['dart_coverage'])} | {_pct(row['dart_text_kpi_coverage'])} | {row['primary_sector_source']} | {row['top_name']} | {row['avg_composite_score']:.2f} | `{pdf.name if pdf else ''}` | `{md.name if md else ''}` |"
         )
     return "\n".join(lines) + "\n"
 
@@ -854,7 +970,9 @@ def _short_name(name: str) -> str:
 def _format_metric(column: str, value: float) -> str:
     if column == "current_per":
         return _per_multiple(value)
-    if column in {"current_pbr", "current_psr"}:
+    if column == "ev_ebitda_proxy":
+        return _per_multiple(value)
+    if column in {"current_pbr", "current_psr", "ev_ebitda_proxy", "net_debt_to_equity"}:
         return _multiple(value)
     if column in {
         "roe",
@@ -867,6 +985,8 @@ def _format_metric(column: str, value: float) -> str:
         return _pct(value)
     if pd.isna(value):
         return "-"
+    if column.endswith("_evidence"):
+        return f"{int(value)}"
     return f"{value:.2f}"
 
 

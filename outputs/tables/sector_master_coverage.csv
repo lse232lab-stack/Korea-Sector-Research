@@ -1,0 +1,11 @@
+﻿analyst_sector,sector_source,count
+Construction & Infrastructure,kospi200_constituent,10
+Consumer & Healthcare,kospi200_constituent,14
+Consumer & Retail,kospi200_constituent,53
+Energy & Chemicals,kospi200_constituent,28
+Financials,kospi200_constituent,22
+Gaming & Internet,kospi200_constituent,10
+IT Hardware & Components,kospi200_constituent,16
+Industrials,kospi200_constituent,37
+Packaging & Materials,kospi200_constituent,10
+Unclassified,fallback,790

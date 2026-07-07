@@ -11,8 +11,10 @@ Universe: Latest KOSPI200 quant Top30
 - Primary valuation: PER with PBR cross-check
 - Cross-check: PBR/ROE, sales growth, operating margin
 - 핵심 드라이버: 실적 성장률, 마진 안정성, 브랜드/가격결정력, 재무건전성
-- 섹터 분류 원천: KOSPI200 constituent sector
+- 섹터 분류 원천: master/KOSPI200
 - DART 재무 커버리지: 100.0%
+- DART 원문 KPI 커버리지: 100.0%
+- 평균 analyst note readiness: 85.7%
 
 ## Thesis
 
