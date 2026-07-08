@@ -17,7 +17,9 @@ from src.data.ts2000_wide_loader import prepare_long_horizon_fundamentals
 from src.data.universe import fetch_kospi200_constituents_from_wikipedia
 from src.data.validator import write_data_validation_outputs
 from src.data.dart_batch import fetch_top30_dart_data
+from src.data.dart_table_parser import build_dart_table_bridges
 from src.data.dart_text_kpi import build_dart_text_kpis
+from src.data.ir_guidance_parser import extract_ir_guidance_tables
 from src.data.sector_master import build_sector_master
 from src.factors.integrated import build_integrated_factor_scores
 from src.factors.pipeline import build_fundamental_factor_scores, build_price_factor_scores
@@ -50,6 +52,8 @@ def parse_args() -> argparse.Namespace:
             "combine-yearly-prices",
             "fetch-top30-dart",
             "extract-dart-kpis",
+            "parse-dart-tables",
+            "extract-ir-guidance",
             "fetch-universe",
             "build-sector-master",
             "prepare-fundamentals",
@@ -268,6 +272,16 @@ def parse_args() -> argparse.Namespace:
         help="Optional max document count for --step extract-dart-kpis.",
     )
     parser.add_argument(
+        "--fetch-dart-raw-documents",
+        action="store_true",
+        help="Download raw OpenDART XML/HTML files for --step parse-dart-tables.",
+    )
+    parser.add_argument(
+        "--ir-dir",
+        default="data/raw/ir",
+        help="Directory containing local IR PDFs for --step extract-ir-guidance.",
+    )
+    parser.add_argument(
         "--initial-cash",
         type=float,
         default=100_000_000,
@@ -402,6 +416,32 @@ def main() -> None:
         print(f"Saved {result.kpi_path}")
         print(f"Saved {result.snippet_path}")
         print(f"Documents: {result.document_dir}")
+        return
+
+    if args.step == "parse-dart-tables":
+        result = build_dart_table_bridges(
+            filings_path=f"{args.dart_output_dir}/filings.csv",
+            output_dir=args.dart_output_dir,
+            env_file=args.env_file,
+            fetch_raw_documents=args.fetch_dart_raw_documents,
+            max_documents=args.max_dart_documents,
+        )
+        print(f"Saved {result.table_inventory_path}")
+        print(f"Saved {result.bridge_summary_path}")
+        print(f"Saved {result.revenue_bridge_path}")
+        print(f"Saved {result.ebitda_bridge_path}")
+        print(f"Saved {result.backlog_bridge_path}")
+        print(f"Saved {result.nav_bridge_path}")
+        print(f"Raw documents: {result.raw_document_dir}")
+        return
+
+    if args.step == "extract-ir-guidance":
+        result = extract_ir_guidance_tables(
+            ir_dir=args.ir_dir,
+            output_dir=args.ir_dir,
+        )
+        print(f"Saved {result.guidance_table_path}")
+        print(f"Saved {result.coverage_path}")
         return
 
     if args.step == "build-sector-master":
@@ -725,6 +765,7 @@ def main() -> None:
             dart_company_path=f"{args.dart_output_dir}/company_profiles.csv",
             dart_accounts_path=f"{args.dart_output_dir}/single_accounts.csv",
             dart_text_kpi_path=f"{args.dart_output_dir}/dart_text_kpis.csv",
+            dart_bridge_path=f"{args.dart_output_dir}/dart_bridge_summary.csv",
             output_dir=args.sector_report_output_dir,
             top_n=args.sector_report_top_n,
         )

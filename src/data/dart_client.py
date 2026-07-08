@@ -126,6 +126,14 @@ class DARTClient:
             chunks.append(_strip_xml_tags(text))
         return "\n".join(chunks)
 
+    def report_document_files(self, rcept_no: str) -> dict[str, str]:
+        """Return decoded raw OpenDART document files keyed by archive name."""
+        archive = self.download_zip("document.xml", rcept_no=rcept_no)
+        files: dict[str, str] = {}
+        for name in archive.namelist():
+            files[name] = _decode_bytes(archive.read(name))
+        return files
+
 
 def _text(node: ElementTree.Element, child: str) -> str:
     found = node.find(child)

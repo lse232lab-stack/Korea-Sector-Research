@@ -59,6 +59,7 @@ def generate_sector_reports(
     dart_company_path: str | Path = "data/raw/dart/top30/company_profiles.csv",
     dart_accounts_path: str | Path = "data/raw/dart/top30/single_accounts.csv",
     dart_text_kpi_path: str | Path = "data/raw/dart/top30/dart_text_kpis.csv",
+    dart_bridge_path: str | Path = "data/raw/dart/top30/dart_bridge_summary.csv",
     output_dir: str | Path = "outputs/reports/sector_top30",
     top_n: int = 30,
 ) -> SectorReportResult:
@@ -76,6 +77,7 @@ def generate_sector_reports(
         dart_company_path=dart_company_path,
         dart_accounts_path=dart_accounts_path,
         dart_text_kpi_path=dart_text_kpi_path,
+        dart_bridge_path=dart_bridge_path,
         top_n=top_n,
     )
     sector_summary = build_sector_summary(top)
@@ -121,6 +123,7 @@ def build_top_sector_dataset(
     dart_company_path: str | Path,
     dart_accounts_path: str | Path,
     dart_text_kpi_path: str | Path,
+    dart_bridge_path: str | Path,
     top_n: int,
 ) -> pd.DataFrame:
     scores = pd.read_csv(ROOT / score_path, dtype={"ticker": "string"}, parse_dates=["signal_date"])
@@ -175,6 +178,7 @@ def build_top_sector_dataset(
     top = _merge_dart_company(top, dart_company_path)
     top = _merge_dart_accounts(top, dart_accounts_path)
     top = _merge_dart_text_kpis(top, dart_text_kpi_path)
+    top = _merge_dart_bridge_summary(top, dart_bridge_path)
     top["financial_data_basis"] = top.get("financial_data_basis", pd.Series(index=top.index, dtype="string")).fillna("TS2000 annual")
     top["eps"] = top["net_income"] / top["shares_outstanding"]
     top["bps"] = top["equity"] / top["shares_outstanding"]
@@ -221,6 +225,7 @@ def build_sector_summary(top: pd.DataFrame) -> pd.DataFrame:
                 "total_market_cap_proxy": frame["market_cap_proxy"].sum(),
                 "dart_coverage": frame["financial_data_basis"].astype(str).str.contains("OpenDART", na=False).mean(),
                 "dart_text_kpi_coverage": frame["analyst_note_readiness"].notna().mean(),
+                "dart_table_bridge_coverage": frame["dart_table_bridge_count"].fillna(0).gt(0).mean(),
                 "avg_analyst_note_readiness": frame["analyst_note_readiness"].mean(),
                 "primary_sector_source": frame["sector_source"].mode().iloc[0] if not frame["sector_source"].mode().empty else "fallback",
             }
@@ -387,6 +392,45 @@ def _merge_dart_text_kpis(top: pd.DataFrame, dart_text_kpi_path: str | Path) -> 
     kpis["ticker"] = kpis["ticker"].astype("string").str.zfill(6)
     keep = ["ticker", *[col for col in kpi_columns if col in kpis.columns]]
     return top.merge(kpis[keep], on="ticker", how="left")
+
+
+def _merge_dart_bridge_summary(top: pd.DataFrame, dart_bridge_path: str | Path) -> pd.DataFrame:
+    path = ROOT / dart_bridge_path
+    bridge_columns = [
+        "dart_table_bridge_count",
+        "revenue_segment_bridge_count",
+        "ebitda_bridge_count",
+        "backlog_bridge_count",
+        "nav_bridge_count",
+    ]
+    if not path.exists():
+        for column in bridge_columns:
+            top[column] = 0
+        return top
+    try:
+        bridges = pd.read_csv(path, dtype={"ticker": "string"})
+    except pd.errors.EmptyDataError:
+        for column in bridge_columns:
+            top[column] = 0
+        return top
+    if bridges.empty or "bridge_type" not in bridges.columns:
+        for column in bridge_columns:
+            top[column] = 0
+        return top
+    bridges["ticker"] = bridges["ticker"].astype("string").str.zfill(6)
+    counts = bridges.groupby(["ticker", "bridge_type"]).size().unstack(fill_value=0).reset_index()
+    counts["dart_table_bridge_count"] = counts.drop(columns=["ticker"]).sum(axis=1)
+    rename = {
+        "revenue_segment": "revenue_segment_bridge_count",
+        "ebitda_bridge": "ebitda_bridge_count",
+        "backlog_bridge": "backlog_bridge_count",
+        "nav_bridge": "nav_bridge_count",
+    }
+    counts = counts.rename(columns=rename)
+    for column in bridge_columns:
+        if column not in counts.columns:
+            counts[column] = 0
+    return top.merge(counts[["ticker", *bridge_columns]], on="ticker", how="left").fillna({column: 0 for column in bridge_columns})
 
 
 def _parse_amount(value: object) -> float | None:
@@ -737,10 +781,11 @@ def _sector_kpi_table(summary: pd.Series, frame: pd.DataFrame, profile: SectorVa
         ["주 valuation", profile.primary_method, "보조 지표", profile.cross_checks],
         ["섹터 원천", summary["primary_sector_source"], "DART 재무 커버리지", _pct(summary["dart_coverage"])],
         ["DART 원문 커버리지", _pct(summary["dart_text_kpi_coverage"]), "Note readiness", _pct(summary["avg_analyst_note_readiness"])],
+        ["DART 표 bridge", _pct(summary["dart_table_bridge_coverage"]), "EV/EBITDA", _multiple(summary["median_ev_ebitda_proxy"])],
         ["평균 퀀트점수", f"{summary['avg_composite_score']:.2f}", "평균 ML", f"{summary['avg_ml_score']:.2f}"],
-        ["중위 PER", _per_multiple(summary["median_per_positive"]), "EV/EBITDA", _multiple(summary["median_ev_ebitda_proxy"])],
-        ["중위 PBR", _multiple(summary["median_pbr"]), "순부채/자본", _multiple(summary["median_net_debt_to_equity"])],
-        ["평균 ROE", _pct(summary["avg_roe"]), "평균 OPM", _pct(summary["avg_op_margin"])],
+        ["중위 PER", _per_multiple(summary["median_per_positive"]), "중위 PBR", _multiple(summary["median_pbr"])],
+        ["순부채 지표", _multiple(summary["median_net_debt_to_equity"]), "평균 OPM", _pct(summary["avg_op_margin"])],
+        ["평균 ROE", _pct(summary["avg_roe"]), "매출 성장률", _pct(summary["avg_sales_growth"])],
     ]
     table = Table(data, colWidths=[28 * mm, 50 * mm, 28 * mm, 70 * mm])
     table.setStyle(_table_style(header=False))
@@ -884,6 +929,7 @@ Universe: Latest KOSPI200 quant Top{top_n}
 - 섹터 분류 원천: {summary['primary_sector_source']}
 - DART 재무 커버리지: {_pct(summary['dart_coverage'])}
 - DART 원문 KPI 커버리지: {_pct(summary['dart_text_kpi_coverage'])}
+- DART 표 bridge 커버리지: {_pct(summary['dart_table_bridge_coverage'])}
 - 평균 analyst note readiness: {_pct(summary['avg_analyst_note_readiness'])}
 
 ## Thesis
@@ -910,15 +956,15 @@ def _build_index_markdown(top: pd.DataFrame, sector_summary: pd.DataFrame, pdf_p
         f"- Generated sectors: {len(sector_summary)}",
         f"- Top{top_n} CSV: `latest_top30_sector_classification.csv`",
         "",
-        "| Sector | Method | Count | DART Fin. | DART Text | Sector Source | Top Pick | Avg Score | PDF | Markdown |",
-        "|---|---|---:|---:|---:|---|---|---:|---|---|",
+        "| Sector | Method | Count | DART Fin. | DART Text | DART Table | Sector Source | Top Pick | Avg Score | PDF | Markdown |",
+        "|---|---|---:|---:|---:|---:|---|---|---:|---|---|",
     ]
     for _, row in sector_summary.iterrows():
         slug = _slugify(row["sector_model"])
         pdf = pdf_map.get(slug)
         md = md_map.get(slug)
         lines.append(
-            f"| {row['sector_model']} | {row['primary_method']} | {int(row['count'])} | {_pct(row['dart_coverage'])} | {_pct(row['dart_text_kpi_coverage'])} | {row['primary_sector_source']} | {row['top_name']} | {row['avg_composite_score']:.2f} | `{pdf.name if pdf else ''}` | `{md.name if md else ''}` |"
+            f"| {row['sector_model']} | {row['primary_method']} | {int(row['count'])} | {_pct(row['dart_coverage'])} | {_pct(row['dart_text_kpi_coverage'])} | {_pct(row['dart_table_bridge_coverage'])} | {row['primary_sector_source']} | {row['top_name']} | {row['avg_composite_score']:.2f} | `{pdf.name if pdf else ''}` | `{md.name if md else ''}` |"
         )
     return "\n".join(lines) + "\n"
 

@@ -14,6 +14,7 @@ Universe: Latest KOSPI200 quant Top30
 - 섹터 분류 원천: master/KOSPI200
 - DART 재무 커버리지: 100.0%
 - DART 원문 KPI 커버리지: 100.0%
+- DART 표 bridge 커버리지: 100.0%
 - 평균 analyst note readiness: 92.8%
 
 ## Thesis
