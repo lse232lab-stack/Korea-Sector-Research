@@ -28,6 +28,7 @@ from src.report.client_strategy_report import generate_client_strategy_report
 from src.report.interview_manual import generate_interview_manual
 from src.report.report_generator import generate_initial_report
 from src.report.research_paper import generate_research_paper
+from src.report.company_report_model import generate_company_reports
 from src.report.sector_report_model import generate_sector_reports
 from src.research.factor_report import build_factor_validation_report
 from src.research.recruiting_assignment_pack import run_recruiting_assignment_pack
@@ -75,6 +76,7 @@ def parse_args() -> argparse.Namespace:
             "generate-research-paper",
             "generate-manual",
             "generate-sector-reports",
+            "generate-company-reports",
             "run-paper-trading",
         ],
         help="Pipeline step to run. Only placeholders exist in the initial scaffold.",
@@ -238,6 +240,11 @@ def parse_args() -> argparse.Namespace:
         "--sector-report-output-dir",
         default="outputs/reports/sector_top30",
         help="Output directory for --step generate-sector-reports.",
+    )
+    parser.add_argument(
+        "--company-report-output-dir",
+        default="outputs/reports/company_top30",
+        help="Output directory for --step generate-company-reports.",
     )
     parser.add_argument(
         "--sector-report-top-n",
@@ -773,6 +780,37 @@ def main() -> None:
         print(f"Saved {result.sector_summary_csv}")
         print(f"Saved {result.index_markdown}")
         print(f"Generated {len(result.pdf_paths):,} sector PDF report(s)")
+        for path in result.pdf_paths:
+            print(f"Saved {path}")
+        return
+
+    if args.step == "generate-company-reports":
+        company_fundamentals_path = (
+            "data/raw/ts2000/fundamentals_long.csv"
+            if args.fundamentals_path == "data/raw/ts2000/fundamentals.csv"
+            else args.fundamentals_path
+        )
+        company_price_path = (
+            "data/raw/price/prices_2007_2026.csv"
+            if args.price_path == "data/raw/price/prices.csv"
+            else args.price_path
+        )
+        result = generate_company_reports(
+            score_path="data/features/institutional_core_satellite_scores.csv",
+            fundamentals_path=company_fundamentals_path,
+            price_path=company_price_path,
+            universe_path=args.universe_path,
+            sector_master_path=args.sector_master_path,
+            dart_company_path=f"{args.dart_output_dir}/company_profiles.csv",
+            dart_accounts_path=f"{args.dart_output_dir}/single_accounts.csv",
+            dart_text_kpi_path=f"{args.dart_output_dir}/dart_text_kpis.csv",
+            dart_bridge_path=f"{args.dart_output_dir}/dart_bridge_summary.csv",
+            output_dir=args.company_report_output_dir,
+            top_n=args.sector_report_top_n,
+        )
+        print(f"Saved {result.valuation_csv}")
+        print(f"Saved {result.index_markdown}")
+        print(f"Generated {len(result.pdf_paths):,} company PDF report(s)")
         for path in result.pdf_paths:
             print(f"Saved {path}")
         return
